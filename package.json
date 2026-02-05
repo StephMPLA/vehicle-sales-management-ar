@@ -1,0 +1,26 @@
+{
+  "name": "vehiclesalesmanagementar",
+  "version": "1.0.0",
+  "description": "Vehicle Sales Management AR is a Symfony-based web application designed to manage a vehicle sales catalog, with structured backend architecture and modern interactive features including 3D model visualization and Augmented Reality preview.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephMPLA/vehicle-sales-management-ar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephMPLA/vehicle-sales-management-ar/issues"
+  },
+  "homepage": "https://github.com/StephMPLA/vehicle-sales-management-ar#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.18"
+  }
+}

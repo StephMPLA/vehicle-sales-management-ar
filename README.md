@@ -27,7 +27,12 @@ This project is built as a technical portfolio demonstration focusing on backend
 
 **Frontend**
 - Twig
-- Tailwind CSS With AssetMapper Component
+  Tailwind CSS is used together with Symfony AssetMapper for styling.
+
+This project does not use a Tailwind build pipeline.
+The npm setup and tailwind.config.js file are included only for local development tooling, in order to enable Tailwind CSS autocompletion and class validation inside PhpStorm.
+
+No Node-based build step is required to run the project.
 
 **Database**
 - PostgreSQL / MySQL 

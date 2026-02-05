@@ -24,3 +24,7 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+/node_modules/
+package-lock.json
+npm-debug.log*
+.tailwindcss/
