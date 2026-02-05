@@ -71,6 +71,6 @@ Un champ d’ordre d’affichage est utilisé pour garantir l’ordre des images
 ## Choix de modélisation
 
 - Les demandes de réservation sont séparées du véhicule pour conserver l’historique
-- Le statut du véhicule est stocké directement dans la table Vehicle pour simplifier les filtres
+-  Le statut du véhicule (available / reserved / sold) est stocké directement dans la table Vehicle afin de refléter son état métier courant et de contrôler les actions possibles côté application.
 - Les images sont isolées dans une table dédiée pour supporter plusieurs visuels
 - Les tables de référence évitent les valeurs libres et les incohérences

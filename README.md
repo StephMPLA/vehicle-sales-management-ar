@@ -121,6 +121,18 @@ No Node-based build step is required to run the project.
 
 ---
 
+## Database Architecture
+
+The database model (MLD) and its detailed explanation are available in the architecture documentation:
+
+- MLD diagram: `docs/architecture/mld-final.png`
+- Model explanation (EN): `docs/architecture/mld-explanation.md`
+- Explication du modèle (FR): `docs/architecture/mld-explanation_FR.md`
+
+This documentation explains the domain modeling choices and the reservation workflow design.
+
+---
+
 ## Features (planned / in progress)
 
 - vehicle catalog management

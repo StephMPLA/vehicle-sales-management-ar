@@ -71,6 +71,6 @@ A display order field is used to control image ordering in the frontend carousel
 ## Modeling choices
 
 - Reservation requests are stored in a separate entity to keep history and workflow traceability
-- Vehicle status is stored directly in the Vehicle table to simplify catalog filtering
+- The vehicle status (available / reserved / sold) is stored directly in the Vehicle table to indicate its current state and control allowed user actions.
 - Images are normalized into a dedicated table to support multiple visuals
 - Reference tables (Brand, Fuel, Category) ensure controlled and consistent values

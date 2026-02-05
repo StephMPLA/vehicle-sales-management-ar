@@ -135,6 +135,18 @@ Aucune étape de build Node n’est nécessaire pour exécuter le projet.
 
 ---
 
+## Architecture de la base de données
+
+Le modèle logique de données (MLD) ainsi que son explication détaillée sont disponibles dans la documentation d’architecture :
+
+- Diagramme MLD : `docs/architecture/mld-final.png`
+- Explication du modèle (EN) : `docs/architecture/mld-explanation.md`
+- Explication du modèle (FR) : `docs/architecture/mld-explanation_FR.md`
+
+Cette documentation présente les choix de modélisation métier et la logique du workflow de réservation.
+
+---
+
 ## Fonctionnalités (prévues / en cours)
 
 - gestion du catalogue de véhicules
