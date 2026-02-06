@@ -38,6 +38,7 @@ Each vehicle contains technical and commercial information:
 - name
 - year
 - price
+- horsePower
 - weight
 - description
 - creation date

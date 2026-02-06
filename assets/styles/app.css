@@ -14,11 +14,11 @@ html, body {
 }
 
 body {
-    background-color: #3a3a3a;
-    color: white;
+    background-color: #ffffff;
+    color: #040404;
 }
 main{
-    margin: 1rem;
+margin-top: 70px;
 }
 footer
 {

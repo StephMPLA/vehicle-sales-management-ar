@@ -38,6 +38,7 @@ Chaque véhicule contient les informations techniques et commerciales :
 - nom
 - année
 - prix
+- puissance
 - poids
 - description
 - date de création

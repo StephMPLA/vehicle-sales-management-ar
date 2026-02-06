@@ -63,6 +63,9 @@ class Vehicle
     #[ORM\JoinColumn(nullable: false)]
     private VehicleStatus $status;
 
+    #[ORM\Column(type: 'integer')]
+    private int $horsepower;
+
     #[ORM\Column(type: 'boolean')]
     private bool $isUsed = false;
 
@@ -269,6 +272,15 @@ class Vehicle
     public function getImage(): Collection
     {
         return $this->image;
+    }
+    public function getHorsepower(): int
+    {
+        return $this->horsepower;
+    }
+
+    public function setHorsepower(int $horsepower): void
+    {
+        $this->horsepower = $horsepower;
     }
 
     public function addImage(VehicleImage $image): static
