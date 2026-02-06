@@ -1,76 +1,203 @@
-# Database Model — Vehicle Sales Management AR
+# Data Model — Vehicle Sales Management AR
 
-This document explains the logical database model (MLD) used in this project.
+This document describes the logical data model (LDM) of the **Vehicle Sales Management AR** project.
 
-The goal of the schema is to support a vehicle sales demonstration platform including a catalog, a reservation request workflow, multiple images per vehicle, and optional 3D / AR visualization.
+The goal is to structure a consistent database for a vehicle sales demonstration platform including:
 
-The model was designed to stay simple, consistent with the business needs, and easy to implement with Symfony and Doctrine ORM.
-
----
-
-## General approach
-
-The database structure is organized around four main areas:
-
-- vehicle catalog
-- users
+- a vehicle catalog
+- user management
 - reservation requests
-- media resources (images)
-
-Reference tables such as brand, fuel type, and category are separated to keep data consistent and avoid free-text duplication.
-
----
-
-## Main entities
-
-### Vehicle
-
-Represents a vehicle listed in the catalog.
-
-Each vehicle is linked to a brand, a fuel type, and a category.
-
-It stores both technical and business data such as year, price, transmission, weight, description, condition (new or used), and a status (available, reserved, sold).
-
-A 3D model path can also be stored when AR preview is available.
-
-A vehicle can have multiple images and multiple reservation requests.
+- multiple image management
+- optional 3D / AR visualization
 
 ---
 
-### User
+# Modeling Principles
 
-Represents a registered user or administrator.
+The database is organized around four functional blocks:
 
-Stores identity and contact information.  
-A role system is used to distinguish administrators from standard users.
+- **Vehicle catalog**
+- **Users**
+- **Reservation requests**
+- **Media resources**
 
-A user can create multiple reservation requests.
+Reusable business values (brand, fuel, status, transmission, etc.) are stored in **reference tables**.
 
 ---
 
-### ReservationRequest
+# Main Entities
+
+---
+
+## Vehicle
+
+Represents a vehicle available in the catalog.
+
+Each vehicle contains technical and commercial information:
+
+- name
+- year
+- price
+- weight
+- description
+- creation date
+- optional 3D model path (AR visualization)
+
+A vehicle is linked to several reference tables:
+
+- one brand
+- one fuel type
+- one category
+- one transmission type
+- one commercial condition (new / used)
+- one availability status
+
+Relations:
+
+- a vehicle can have multiple images or none (OneToMany — 0..n)
+- a vehicle can receive multiple reservation requests (OneToMany — 0..n)
+
+---
+
+## User
+
+Represents a platform user.
+
+Contains identity and contact information:
+
+- first name
+- last name
+- email
+- phone
+- postal code
+- city
+- creation date
+- hashed password
+- security roles
+
+A user can create multiple reservation requests (OneToMany — 0..n).
+
+Roles allow distinction between:
+
+- administrator
+- standard user
+
+---
+
+## ReservationRequest
 
 Represents a reservation request made by a user for a vehicle.
 
-This table is used to keep request history and support an admin validation workflow.
+This entity allows:
 
-Each request has a status: pending, approved, or refused.
+- keeping request history
+- managing the validation workflow
+- avoiding business data deletion
+- tracking actions
 
-Even though only one reservation can be approved per vehicle, multiple requests are allowed at the database level. Conflict prevention is handled by application business logic.
+Each request is linked to:
+
+- one user
+- one vehicle
+- one reservation status
+
+Multiple requests can exist for the same vehicle.  
+Application business logic handles conflicts and state transitions.
 
 ---
 
-### VehicleImage
+## VehicleImage
 
-Stores multiple images for each vehicle.
+Stores images associated with vehicles.
 
-A display order field is used to control image ordering in the frontend carousel.
+Each image is linked to exactly one vehicle (ManyToOne — 1).  
+A vehicle can have multiple images or none (OneToMany — 0..n).
+
+Main fields:
+
+- image file path
+- alternative text (accessibility / SEO)
+- display order
+
+Display order ensures correct ordering in galleries or carousels.
+
+Images are automatically deleted when detached from their vehicle (orphan removal).
 
 ---
 
-## Modeling choices
+# Reference Tables
 
-- Reservation requests are stored in a separate entity to keep history and workflow traceability
-- The vehicle status (available / reserved / sold) is stored directly in the Vehicle table to indicate its current state and control allowed user actions.
-- Images are normalized into a dedicated table to support multiple visuals
-- Reference tables (Brand, Fuel, Category) ensure controlled and consistent values
+The following tables store controlled values shared by multiple vehicles.
+
+---
+
+## Brand
+
+List of vehicle brands.
+
+Examples: BMW, Audi, Tesla…
+
+Relation:
+
+Brand → Vehicle : OneToMany — 0..n  
+Vehicle → Brand : ManyToOne — 1
+
+---
+
+## Fuel
+
+Fuel types.
+
+Examples: gasoline, diesel, electric…
+
+Relation:
+
+Fuel → Vehicle : OneToMany — 0..n  
+Vehicle → Fuel : ManyToOne — 1
+
+---
+
+## Category
+
+Examples: SUV, sedan, utility…
+
+Relation:
+
+Category → Vehicle : OneToMany — 0..n  
+Vehicle → Category : ManyToOne — 1
+
+---
+
+## VehicleTransmission
+
+Relation:
+
+VehicleTransmission → Vehicle : OneToMany — 0..n  
+Vehicle → VehicleTransmission : ManyToOne — 1
+
+---
+
+## Condition
+
+Relation:
+
+Condition → Vehicle : OneToMany — 0..n  
+Vehicle → Condition : ManyToOne — 1
+
+---
+
+## VehicleStatus
+
+Relation:
+
+VehicleStatus → Vehicle : OneToMany — 0..n  
+Vehicle → VehicleStatus : ManyToOne — 1
+
+---
+
+## ReservationStatus
+
+Relation:
+
+ReservationStatus → ReservationRequest : OneToMany — 0..n  
+ReservationRequest → ReservationStatus : ManyToOne — 1

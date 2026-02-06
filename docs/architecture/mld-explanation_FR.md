@@ -1,76 +1,191 @@
 # Modèle de données — Vehicle Sales Management AR
 
-Ce document présente le modèle logique de données (MLD) utilisé dans le projet.
+Ce document décrit le modèle logique de données (MLD) du projet **Vehicle Sales Management AR**.
 
-L’objectif est de structurer une base de données adaptée à une plateforme de démonstration de vente de véhicules, avec gestion de catalogue, demandes de réservation, images multiples et visualisation 3D/AR optionnelle.
+L’objectif est de structurer une base de données cohérente pour une plateforme de démonstration de vente de véhicules intégrant :
 
-Le modèle a été pensé pour rester simple, cohérent métier, et facilement exploitable avec Symfony et Doctrine.
-
----
-
-## Principes généraux
-
-La base est organisée autour de quatre blocs principaux :
-
-- le catalogue de véhicules
-- les utilisateurs
+- un catalogue de véhicules
+- la gestion des utilisateurs
 - les demandes de réservation
-- les ressources médias (images)
-
-Les tables de référence (marque, carburant, catégorie) sont séparées afin de garantir la cohérence des données et faciliter les relations.
+- la gestion d’images multiples
+- la visualisation 3D / AR optionnelle
 
 ---
 
-## Entités principales
+# Principes de modélisation
 
-### Vehicle
+La base est organisée autour de quatre blocs fonctionnels :
+
+- **Catalogue véhicule**
+- **Utilisateurs**
+- **Demandes de réservation**
+- **Ressources médias**
+
+Les valeurs métier répétables (marque, carburant, statut, transmission, etc.) sont stockées dans des **tables de référence**.
+
+---
+
+# Entités principales
+
+---
+
+## Vehicle
 
 Représente un véhicule présent dans le catalogue.
 
-Chaque véhicule est lié à une marque, un type de carburant et une catégorie.
+Chaque véhicule contient les informations techniques et commerciales :
 
-Il contient les informations techniques et commerciales : année, prix, transmission, poids, description, état (neuf ou occasion), ainsi qu’un statut (disponible, réservé, vendu).
+- nom
+- année
+- prix
+- poids
+- description
+- date de création
+- chemin optionnel vers un modèle 3D (visualisation AR)
 
-Un chemin vers un modèle 3D peut être stocké lorsqu’une visualisation AR est disponible.
+Un véhicule est lié à plusieurs tables de référence :
 
-Un véhicule peut avoir plusieurs images et plusieurs demandes de réservation.
+- une marque
+- un carburant
+- une catégorie
+- un type de transmission
+- une condition commerciale (neuf / occasion)
+- un statut de disponibilité
+
+Relations :
+
+- un véhicule peut posséder plusieurs images ou aucune (relation OneToMany — 0..n)
+- un véhicule peut recevoir plusieurs demandes de réservation (relation OneToMany — 0..n)
 
 ---
 
-### User
+## User
 
-Représente un utilisateur enregistré sur la plateforme.
+Représente un utilisateur de la plateforme.
 
-Contient les informations d’identité et de contact.  
-Un système de rôles permet de distinguer les administrateurs des utilisateurs standards.
+Contient les informations d’identité et de contact :
 
-Un utilisateur peut effectuer plusieurs demandes de réservation.
+- prénom
+- nom
+- email
+- téléphone
+- code postal
+- ville
+- date de création
+- mot de passe hashé
+- rôles de sécurité
+
+Un utilisateur peut effectuer plusieurs demandes de réservation (relation OneToMany — 0..n).
+
+Les rôles permettent de distinguer :
+
+- administrateur
+- utilisateur standard
 
 ---
 
-### ReservationRequest
+## ReservationRequest
 
 Représente une demande de réservation faite par un utilisateur pour un véhicule.
 
-Cette table permet de conserver l’historique des demandes et de gérer le workflow de validation côté administrateur.
+Cette entité permet :
 
-Chaque demande possède un statut : en attente, validée ou refusée.
+- de conserver l’historique des demandes
+- de gérer le workflow de validation
+- d’éviter la suppression de données métier
+- de tracer les actions
 
-Même si un véhicule ne peut être réservé qu’une seule fois au final, plusieurs demandes peuvent exister — la logique métier côté application empêche les conflits.
+Chaque demande est liée à :
+
+- un utilisateur
+- un véhicule
+- un statut de réservation
+
+Plusieurs demandes peuvent exister pour un même véhicule.  
+La logique métier applicative gère les conflits et transitions d’état.
 
 ---
 
-### VehicleImage
+## VehicleImage
 
-Permet de stocker plusieurs images par véhicule.
+Stocke les images associées aux véhicules.
 
-Un champ d’ordre d’affichage est utilisé pour garantir l’ordre des images dans le carousel côté interface.
+Chaque image est liée à un seul véhicule (relation ManyToOne — 1).
+Un véhicule peut avoir plusieurs images ou aucune (relation OneToMany — 0..n).
+
+Champs principaux :
+
+- chemin du fichier image
+- texte alternatif (accessibilité / SEO)
+- ordre d’affichage
+
+L’ordre d’affichage permet de contrôler la présentation dans les galeries ou carousels.
+
+Les images sont supprimées automatiquement si elles sont détachées du véhicule (orphan removal).
 
 ---
 
-## Choix de modélisation
+# Tables de référence
 
-- Les demandes de réservation sont séparées du véhicule pour conserver l’historique
--  Le statut du véhicule (available / reserved / sold) est stocké directement dans la table Vehicle afin de refléter son état métier courant et de contrôler les actions possibles côté application.
-- Les images sont isolées dans une table dédiée pour supporter plusieurs visuels
-- Les tables de référence évitent les valeurs libres et les incohérences
+Les tables suivantes contiennent des valeurs contrôlées partagées par plusieurs véhicules.
+
+---
+
+## Brand
+
+Liste des marques de véhicules.
+
+Exemples : BMW, Audi, Tesla…
+
+Relation :
+
+Brand → Vehicle : OneToMany — 0..n  
+Vehicle → Brand : ManyToOne — 1
+
+## Fuel
+
+Types de carburant.
+
+Exemples : essence, diesel, électrique…
+
+Relation :
+
+Fuel → Vehicle : OneToMany — 0..n  
+Vehicle → Fuel : ManyToOne — 1
+
+## Category
+
+Exemples : SUV, berline, utilitaire…
+
+Relation :
+
+Category → Vehicle : OneToMany — 0..n  
+Vehicle → Category : ManyToOne — 1
+
+## VehicleTransmission
+
+Relation :
+
+VehicleTransmission → Vehicle : OneToMany — 0..n  
+Vehicle → VehicleTransmission : ManyToOne — 1
+
+## Condition
+
+Relation :
+
+Condition → Vehicle : OneToMany — 0..n  
+Vehicle → Condition : ManyToOne — 1
+
+## VehicleStatus
+
+Relation :
+
+VehicleStatus → Vehicle : OneToMany — 0..n  
+Vehicle → VehicleStatus : ManyToOne — 1
+
+## ReservationStatus
+
+Relation :
+
+ReservationStatus → ReservationRequest : OneToMany — 0..n  
+ReservationRequest → ReservationStatus : ManyToOne — 1
