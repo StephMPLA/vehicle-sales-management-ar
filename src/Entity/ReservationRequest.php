@@ -14,26 +14,28 @@ class ReservationRequest
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private \DateTimeImmutable $created_at;
 
     #[ORM\ManyToOne(inversedBy: 'reservationRequests')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $customer = null;
+    private User $customer;
 
     #[ORM\ManyToOne(inversedBy: 'reservationRequests')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Vehicle $vehicle = null;
+    private Vehicle $vehicle;
 
     #[ORM\ManyToOne(inversedBy: 'reservationRequests')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ReservationStatus $status = null;
+    private ReservationStatus $status;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -45,36 +47,36 @@ class ReservationRequest
         return $this;
     }
 
-    public function getCustomer(): ?User
+    public function getCustomer(): User
     {
         return $this->customer;
     }
 
-    public function setCustomer(?User $customer): static
+    public function setCustomer(User $customer): static
     {
         $this->customer = $customer;
 
         return $this;
     }
 
-    public function getVehicle(): ?Vehicle
+    public function getVehicle(): Vehicle
     {
         return $this->vehicle;
     }
 
-    public function setVehicle(?Vehicle $vehicle): static
+    public function setVehicle(Vehicle $vehicle): static
     {
         $this->vehicle = $vehicle;
 
         return $this;
     }
 
-    public function getStatus(): ?ReservationStatus
+    public function getStatus(): ReservationStatus
     {
         return $this->status;
     }
 
-    public function setStatus(?ReservationStatus $status): static
+    public function setStatus(ReservationStatus $status): static
     {
         $this->status = $status;
 

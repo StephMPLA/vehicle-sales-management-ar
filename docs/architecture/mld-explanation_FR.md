@@ -169,13 +169,6 @@ Relation :
 VehicleTransmission → Vehicle : OneToMany — 0..n  
 Vehicle → VehicleTransmission : ManyToOne — 1
 
-## Condition
-
-Relation :
-
-Condition → Vehicle : OneToMany — 0..n  
-Vehicle → Condition : ManyToOne — 1
-
 ## VehicleStatus
 
 Relation :

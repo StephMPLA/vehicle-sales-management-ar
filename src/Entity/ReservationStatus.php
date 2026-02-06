@@ -6,6 +6,8 @@ use App\Repository\ReservationStatusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ReservationStatusRepository::class)]
 class ReservationStatus
@@ -15,8 +17,10 @@ class ReservationStatus
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 50, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
+    private string $name;
 
     /**
      * @var Collection<int, ReservationRequest>
@@ -66,13 +70,7 @@ class ReservationStatus
 
     public function removeReservationRequest(ReservationRequest $reservationRequest): static
     {
-        if ($this->reservationRequests->removeElement($reservationRequest)) {
-            // set the owning side to null (unless already changed)
-            if ($reservationRequest->getStatus() === $this) {
-                $reservationRequest->setStatus(null);
-            }
-        }
-
+        $this->reservationRequests->removeElement($reservationRequest);
         return $this;
     }
 }

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20260206095802 extends AbstractMigration
+final class Version20260206113212 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,17 +20,16 @@ final class Version20260206095802 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE brand (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE `condition` (id INT AUTO_INCREMENT NOT NULL, is_used TINYINT NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE fuel (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE reservation_request (id INT AUTO_INCREMENT NOT NULL, created_at DATETIME NOT NULL, customer_id INT NOT NULL, vehicle_id INT NOT NULL, status_id INT NOT NULL, INDEX IDX_5C02341A9395C3F3 (customer_id), INDEX IDX_5C02341A545317D1 (vehicle_id), INDEX IDX_5C02341A6BF700BD (status_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE reservation_status (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, phone VARCHAR(20) NOT NULL, city VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE vehicle (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, year DATETIME NOT NULL, price INT NOT NULL, weight INT DEFAULT NULL, description LONGTEXT DEFAULT NULL, date_created DATETIME NOT NULL, model_3d_path VARCHAR(255) DEFAULT NULL, brand_id INT NOT NULL, fuel_id INT NOT NULL, category_id INT NOT NULL, transmission_id INT NOT NULL, status_id INT NOT NULL, condition_id INT NOT NULL, INDEX IDX_1B80E48644F5D008 (brand_id), INDEX IDX_1B80E48697C79677 (fuel_id), INDEX IDX_1B80E48612469DE2 (category_id), INDEX IDX_1B80E48678D28519 (transmission_id), INDEX IDX_1B80E4866BF700BD (status_id), INDEX IDX_1B80E486887793B6 (condition_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE brand (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, UNIQUE INDEX UNIQ_1C52F9585E237E06 (name), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, UNIQUE INDEX UNIQ_64C19C15E237E06 (name), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE fuel (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(20) NOT NULL, UNIQUE INDEX UNIQ_31BD6FE95E237E06 (name), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE reservation_request (id INT AUTO_INCREMENT NOT NULL, created_at DATETIME NOT NULL, customer_id INT DEFAULT NULL, vehicle_id INT DEFAULT NULL, status_id INT DEFAULT NULL, INDEX IDX_5C02341A9395C3F3 (customer_id), INDEX IDX_5C02341A545317D1 (vehicle_id), INDEX IDX_5C02341A6BF700BD (status_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE reservation_status (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, UNIQUE INDEX UNIQ_33F12C875E237E06 (name), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, phone VARCHAR(20) NOT NULL, city VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE vehicle (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, year INT NOT NULL, price INT NOT NULL, weight INT DEFAULT NULL, description LONGTEXT DEFAULT NULL, date_created DATETIME NOT NULL, model_3d_path VARCHAR(255) DEFAULT NULL, is_used TINYINT NOT NULL, brand_id INT DEFAULT NULL, fuel_id INT DEFAULT NULL, category_id INT DEFAULT NULL, transmission_id INT DEFAULT NULL, status_id INT DEFAULT NULL, INDEX IDX_1B80E48644F5D008 (brand_id), INDEX IDX_1B80E48697C79677 (fuel_id), INDEX IDX_1B80E48612469DE2 (category_id), INDEX IDX_1B80E48678D28519 (transmission_id), INDEX IDX_1B80E4866BF700BD (status_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('CREATE TABLE vehicle_image (id INT AUTO_INCREMENT NOT NULL, path VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, sort_order INT NOT NULL, vehicle_id INT NOT NULL, INDEX IDX_A79284B3545317D1 (vehicle_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('CREATE TABLE vehicle_status (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('CREATE TABLE vehicle_transmission (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('CREATE TABLE vehicle_transmission (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, UNIQUE INDEX UNIQ_C66FF6EB5E237E06 (name), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0E3BD61CE16BA31DBBF396750 (queue_name, available_at, delivered_at, id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE reservation_request ADD CONSTRAINT FK_5C02341A9395C3F3 FOREIGN KEY (customer_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE reservation_request ADD CONSTRAINT FK_5C02341A545317D1 FOREIGN KEY (vehicle_id) REFERENCES vehicle (id)');
@@ -40,7 +39,6 @@ final class Version20260206095802 extends AbstractMigration
         $this->addSql('ALTER TABLE vehicle ADD CONSTRAINT FK_1B80E48612469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
         $this->addSql('ALTER TABLE vehicle ADD CONSTRAINT FK_1B80E48678D28519 FOREIGN KEY (transmission_id) REFERENCES vehicle_transmission (id)');
         $this->addSql('ALTER TABLE vehicle ADD CONSTRAINT FK_1B80E4866BF700BD FOREIGN KEY (status_id) REFERENCES vehicle_status (id)');
-        $this->addSql('ALTER TABLE vehicle ADD CONSTRAINT FK_1B80E486887793B6 FOREIGN KEY (condition_id) REFERENCES `condition` (id)');
         $this->addSql('ALTER TABLE vehicle_image ADD CONSTRAINT FK_A79284B3545317D1 FOREIGN KEY (vehicle_id) REFERENCES vehicle (id)');
     }
 
@@ -55,11 +53,9 @@ final class Version20260206095802 extends AbstractMigration
         $this->addSql('ALTER TABLE vehicle DROP FOREIGN KEY FK_1B80E48612469DE2');
         $this->addSql('ALTER TABLE vehicle DROP FOREIGN KEY FK_1B80E48678D28519');
         $this->addSql('ALTER TABLE vehicle DROP FOREIGN KEY FK_1B80E4866BF700BD');
-        $this->addSql('ALTER TABLE vehicle DROP FOREIGN KEY FK_1B80E486887793B6');
         $this->addSql('ALTER TABLE vehicle_image DROP FOREIGN KEY FK_A79284B3545317D1');
         $this->addSql('DROP TABLE brand');
         $this->addSql('DROP TABLE category');
-        $this->addSql('DROP TABLE `condition`');
         $this->addSql('DROP TABLE fuel');
         $this->addSql('DROP TABLE reservation_request');
         $this->addSql('DROP TABLE reservation_status');

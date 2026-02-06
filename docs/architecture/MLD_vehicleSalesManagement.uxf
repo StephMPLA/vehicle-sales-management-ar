@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>360</y>
-      <w>170</w>
-      <h>200</h>
+      <x>808</x>
+      <y>312</y>
+      <w>136</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -27,10 +27,10 @@ password_hash
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>310</y>
-      <w>230</w>
-      <h>260</h>
+      <x>1000</x>
+      <y>272</y>
+      <w>184</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>Vehicle
 --
@@ -40,6 +40,7 @@ fuel_id
 category_id
 vehicleStatus_id
 vehicleTransmission_id
+isUsed
 name
 year
 price
@@ -54,10 +55,10 @@ model_3d_path
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>430</y>
-      <w>150</w>
-      <h>80</h>
+      <x>1304</x>
+      <y>368</y>
+      <w>120</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>fuel
 --
@@ -68,10 +69,10 @@ name</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>620</y>
-      <w>230</w>
-      <h>120</h>
+      <x>1000</x>
+      <y>520</y>
+      <w>184</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>ReservationRequest
 --
@@ -85,10 +86,10 @@ created_at</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>190</y>
-      <w>230</w>
-      <h>80</h>
+      <x>1000</x>
+      <y>176</y>
+      <w>184</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>Brand
 --
@@ -99,10 +100,10 @@ name</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>320</y>
-      <w>150</w>
-      <h>80</h>
+      <x>1304</x>
+      <y>280</y>
+      <w>120</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>Category
 --
@@ -113,10 +114,10 @@ name</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>260</y>
-      <w>50</w>
-      <h>70</h>
+      <x>1088</x>
+      <y>232</y>
+      <w>40</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
@@ -125,10 +126,10 @@ m1=n..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>320</y>
-      <w>180</w>
-      <h>40</h>
+      <x>1176</x>
+      <y>280</y>
+      <w>144</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
@@ -137,10 +138,10 @@ m1=n..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>430</y>
-      <w>180</w>
-      <h>40</h>
+      <x>1176</x>
+      <y>368</y>
+      <w>144</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
@@ -149,10 +150,10 @@ m1=n..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>560</y>
-      <w>50</w>
-      <h>80</h>
+      <x>1080</x>
+      <y>472</y>
+      <w>40</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1..n</panel_attributes>
@@ -161,10 +162,10 @@ m1=1..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>550</y>
-      <w>110</w>
-      <h>90</h>
+      <x>936</x>
+      <y>464</y>
+      <w>88</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -173,10 +174,10 @@ m1=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>170</y>
-      <w>150</w>
-      <h>120</h>
+      <x>1304</x>
+      <y>160</y>
+      <w>120</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>VehicleImage
 --
@@ -191,10 +192,10 @@ sort_order
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>270</y>
-      <w>180</w>
-      <h>70</h>
+      <x>1176</x>
+      <y>240</y>
+      <w>144</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -203,10 +204,10 @@ m1=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>770</y>
-      <w>230</w>
-      <h>70</h>
+      <x>1000</x>
+      <y>640</y>
+      <w>184</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>ReservationStatus
 --
@@ -218,10 +219,10 @@ name
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>530</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1304</x>
+      <y>448</y>
+      <w>120</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>VehicleTransmission
 --
@@ -232,10 +233,10 @@ name</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>620</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1304</x>
+      <y>520</y>
+      <w>120</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>VehicleStatus
 --
@@ -246,10 +247,10 @@ name</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>490</y>
-      <w>180</w>
-      <h>70</h>
+      <x>1176</x>
+      <y>416</y>
+      <w>144</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
@@ -258,10 +259,10 @@ m1=n..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>520</y>
-      <w>180</w>
-      <h>130</h>
+      <x>1176</x>
+      <y>440</y>
+      <w>144</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
@@ -270,39 +271,13 @@ m1=n..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>730</y>
-      <w>50</w>
-      <h>60</h>
+      <x>1080</x>
+      <y>608</y>
+      <w>40</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=n..1</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>910</x>
-      <y>730</y>
-      <w>150</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>Condition
---
-id
-name</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>750</x>
-      <y>560</y>
-      <w>190</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=n..1</panel_attributes>
-    <additional_attributes>160.0;170.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

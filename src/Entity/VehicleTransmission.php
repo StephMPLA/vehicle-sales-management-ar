@@ -15,8 +15,8 @@ class VehicleTransmission
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 50, unique: true)]
+    private string $name;
 
     /**
      * @var Collection<int, Vehicle>
@@ -34,7 +34,7 @@ class VehicleTransmission
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -66,13 +66,7 @@ class VehicleTransmission
 
     public function removeVehicle(Vehicle $vehicle): static
     {
-        if ($this->vehicles->removeElement($vehicle)) {
-            // set the owning side to null (unless already changed)
-            if ($vehicle->getTransmission() === $this) {
-                $vehicle->setTransmission(null);
-            }
-        }
-
+        $this->vehicles->removeElement($vehicle);
         return $this;
     }
 }

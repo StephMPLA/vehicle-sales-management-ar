@@ -17,13 +17,13 @@ class Vehicle
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
+
+    #[ORM\Column(type: 'integer')]
+    private int $year;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $year = null;
-
-    #[ORM\Column]
-    private ?int $price = null;
+    private int $price;
 
     #[ORM\Column(nullable: true)]
     private ?int $weight = null;
@@ -45,27 +45,37 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Brand $brand = null;
+    private Brand $brand;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Fuel $fuel = null;
+    private Fuel $fuel;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
+    private Category $category;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?vehicleTransmission $transmission = null;
+    private VehicleTransmission $transmission;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?VehicleStatus $status = null;
+    private VehicleStatus $status;
 
-    #[ORM\ManyToOne(inversedBy: 'vehicles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Condition $condition = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isUsed = false;
+
+    public function isUsed(): bool
+    {
+        return $this->isUsed;
+    }
+
+    public function setIsUsed(bool $isUsed): self
+    {
+        $this->isUsed = $isUsed;
+        return $this;
+    }
 
     /**
      * @var Collection<int, VehicleImage>
@@ -76,6 +86,7 @@ class Vehicle
     public function __construct()
     {
         $this->reservationRequests = new ArrayCollection();
+        $this->date_created = new \DateTimeImmutable();
         $this->image = new ArrayCollection();
     }
 
@@ -84,7 +95,7 @@ class Vehicle
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -96,12 +107,12 @@ class Vehicle
         return $this;
     }
 
-    public function getYear(): ?\DateTimeImmutable
+    public function getYear(): int
     {
         return $this->year;
     }
 
-    public function setYear(\DateTimeImmutable $year): static
+    public function setYear(int $year): static
     {
         $this->year = $year;
 
@@ -188,13 +199,7 @@ class Vehicle
 
     public function removeReservationRequest(ReservationRequest $reservationRequest): static
     {
-        if ($this->reservationRequests->removeElement($reservationRequest)) {
-            // set the owning side to null (unless already changed)
-            if ($reservationRequest->getVehicle() === $this) {
-                $reservationRequest->setVehicle(null);
-            }
-        }
-
+        $this->reservationRequests->removeElement($reservationRequest);
         return $this;
     }
 
@@ -234,12 +239,12 @@ class Vehicle
         return $this;
     }
 
-    public function getTransmission(): ?vehicleTransmission
+    public function getTransmission(): ?VehicleTransmission
     {
         return $this->transmission;
     }
 
-    public function setTransmission(?vehicleTransmission $transmission): static
+    public function setTransmission(?VehicleTransmission $transmission): static
     {
         $this->transmission = $transmission;
 
@@ -254,18 +259,6 @@ class Vehicle
     public function setStatus(?VehicleStatus $status): static
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCondition(): ?Condition
-    {
-        return $this->condition;
-    }
-
-    public function setCondition(?Condition $condition): static
-    {
-        $this->condition = $condition;
 
         return $this;
     }
