@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>190</y>
+      <w>210</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>User
+--
+id : int
+firstName : string
+lastName : string
+email : string {unique}
+phone : string
+postalCode : string 
+city : string
+created_at : datetime
+roles : json
+passwordHash : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>420</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ReservationRequest
+--
+id : int
+created_at : datetime</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>270</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+r1=Acheteur
+Possède &gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>170</y>
+      <w>240</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Vehicle
+--
+id : int
+name : string
+year : int {YYYY}
+horsePower : int
+mileage : int
+isNew : bool
+price : int
+weight : int
+description : text
+created_at : datetime
+model3dPath : string {file path}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>120</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Brand
+--
+id : int
+name : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>150</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Appartient à &gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>250</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>VehicleImage
+--
+id : int
+path : string
+alt : string
+sort_order : int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>370</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Category
+--
+id : int
+name : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>490</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Fuel
+--
+id : int
+name : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>600</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>VehicleTransmission
+--
+id : int
+name : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>740</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>VehicleStatus
+--
+id : int
+name : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>620</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ReservationStatus
+--
+id : int
+name : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>250</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+
+Possède &gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>330</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Appartient à &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>380</y>
+      <w>260</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Possède &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>380</y>
+      <w>300</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Possède &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>380</y>
+      <w>340</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Possède &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;380.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>490</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+
+Possède &gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>280</y>
+      <w>30</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+</diagram>
