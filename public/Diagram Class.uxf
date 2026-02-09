@@ -11,16 +11,16 @@
     </coordinates>
     <panel_attributes>User
 --
-id : int
-firstName : string
-lastName : string
-email : string {unique}
-phone : string
-postalCode : string 
-city : string
-created_at : datetime
-roles : json
-passwordHash : string</panel_attributes>
+- id : int
+- firstName : string
+- lastName : string
+- email : string {unique}
+- phone : string
+- postalCode : string 
+- city : string
+- created_at : datetime
+- roles : json
+- passwordHash : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -33,8 +33,8 @@ passwordHash : string</panel_attributes>
     </coordinates>
     <panel_attributes>ReservationRequest
 --
-id : int
-created_at : datetime</panel_attributes>
+- id : int
+- created_at : datetime</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -63,17 +63,17 @@ Possède &gt;
     </coordinates>
     <panel_attributes>Vehicle
 --
-id : int
-name : string
-year : int {YYYY}
-horsePower : int
-mileage : int
-isNew : bool
-price : int
-weight : int
-description : text
-created_at : datetime
-model3dPath : string {file path}
+- id : int
+- name : string
+- year : int {YYYY}
+- horsePower : int
+- mileage : int
+- isNew : bool
+- price : int
+- weight : int
+- description : text
+- created_at : datetime
+- model3dPath : string {file path}
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -87,8 +87,8 @@ model3dPath : string {file path}
     </coordinates>
     <panel_attributes>Brand
 --
-id : int
-name : string
+- id : int
+- name : string
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -118,10 +118,10 @@ Appartient à &gt;
     </coordinates>
     <panel_attributes>VehicleImage
 --
-id : int
-path : string
-alt : string
-sort_order : int
+- id : int
+- path : string
+- alt : string
+- sort_order : int
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -135,8 +135,8 @@ sort_order : int
     </coordinates>
     <panel_attributes>Category
 --
-id : int
-name : string
+- id : int
+- name : string
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -150,8 +150,8 @@ name : string
     </coordinates>
     <panel_attributes>Fuel
 --
-id : int
-name : string
+- id : int
+- name : string
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -165,8 +165,8 @@ name : string
     </coordinates>
     <panel_attributes>VehicleTransmission
 --
-id : int
-name : string
+- id : int
+- name : string
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -174,14 +174,14 @@ name : string
     <id>UMLClass</id>
     <coordinates>
       <x>1190</x>
-      <y>740</y>
+      <y>720</y>
       <w>240</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>VehicleStatus
 --
-id : int
-name : string
+- id : int
+- name : string
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -195,8 +195,8 @@ name : string
     </coordinates>
     <panel_attributes>ReservationStatus
 --
-id : int
-name : string</panel_attributes>
+- id : int
+- name : string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -248,9 +248,9 @@ Possède &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
+      <x>870</x>
       <y>380</y>
-      <w>300</w>
+      <w>340</w>
       <h>280</h>
     </coordinates>
     <panel_attributes>lt=-
@@ -258,22 +258,22 @@ m1=0..n
 m2=1
 
 Possède &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;280.0;260.0</additional_attributes>
+    <additional_attributes>10.0;10.0;320.0;260.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
+      <x>750</x>
       <y>380</y>
-      <w>340</w>
-      <h>400</h>
+      <w>460</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=1
 
 Possède &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;320.0;380.0</additional_attributes>
+    <additional_attributes>10.0;10.0;440.0;360.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
