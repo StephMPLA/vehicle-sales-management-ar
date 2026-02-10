@@ -1,35 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Sign in{% endblock %}
 
 {% block body %}
-    <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4">
 
-        <form method="post" class="w-full max-w-md bg-white rounded-xl shadow-md p-8 space-y-6">
+        <form method="post" class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6">
 
-            <h1 class="text-2xl font-bold text-center">
-                Connexion
+            <h1 class="text-2xl font-bold text-center text-gray-800">
+                Sign in
             </h1>
 
-            {# ---- erreur login ---- #}
+            {# ---- login error ---- #}
             {% if error %}
-                <div class="bg-red-100 text-red-700 p-3 rounded text-sm">
+                <div class="bg-red-100 border border-red-200 text-red-700 p-3 rounded-lg text-sm">
                     {{ error.messageKey|trans(error.messageData, 'security') }}
                 </div>
             {% endif %}
 
-            {# ---- déjà connecté ---- #}
+            {# ---- already logged in ---- #}
             {% if app.user %}
-                <div class="bg-blue-100 text-blue-700 p-3 rounded text-sm">
-                    Connecté en tant que {{ app.user.userIdentifier }}
-                    <a href="{{ logout_path() }}" class="underline ml-2">Déconnexion</a>
+                <div class="bg-blue-100 border border-blue-200 text-blue-700 p-3 rounded-lg text-sm">
+                    Signed in as {{ app.user.userIdentifier }}
+                    <a href="{{ logout_path() }}" class="underline ml-2 font-medium">
+                        Sign out
+                    </a>
                 </div>
             {% endif %}
 
             {# ---- email ---- #}
             <div>
-                <label class="block text-sm font-medium mb-1">
-                    Email
+                <label class="block text-sm font-semibold mb-1 text-gray-700">
+                    Email address
                 </label>
                 <input
                     type="email"
@@ -38,38 +40,41 @@
                     required
                     autofocus
                     autocomplete="email"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
             </div>
 
             {# ---- password ---- #}
             <div>
-                <label class="block text-sm font-medium mb-1">
-                    Mot de passe
+                <label class="block text-sm font-semibold mb-1 text-gray-700">
+                    Password
                 </label>
                 <input
                     type="password"
                     name="_password"
                     required
                     autocomplete="current-password"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
             </div>
+
+            {# ---- register link ---- #}
             <a href="{{ path('app_register') }}"
-               class="block text-center text-sm text-blue-600 hover:underline">
-                Pas encore de compte ? Créer un compte
-            </a>            {# ---- csrf ---- #}
+               class="block text-center text-sm text-blue-600 hover:underline font-medium">
+                Don’t have an account? Create one
+            </a>
+
+            {# ---- csrf ---- #}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            {# ---- bouton ---- #}
+            {# ---- button ---- #}
             <button
                 type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+                class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold py-2.5 rounded-lg transition shadow-sm"
             >
-                Se connecter
+                Sign in
             </button>
 
         </form>
-
     </div>
 {% endblock %}
