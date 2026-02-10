@@ -65,7 +65,6 @@ class BrandFixtures extends Fixture
         $hyundai = new Brand();
         $hyundai->setName('Hyundai');
         $manager->persist($hyundai);
-
         $manager->flush();
     }
 }

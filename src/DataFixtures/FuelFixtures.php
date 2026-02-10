@@ -3,16 +3,19 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Fuel;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class FuelFixtures extends Fixture
 {
+    public const GAZOLINE_FUEL_REFERENCE = 'gazoline_fuel';
     public function load(ObjectManager $manager): void
     {
-        $suv = new Category();
-        $suv->setName('Suv');
-        $manager->persist($suv);
-        $manager->flush();
+       $gazoline = new Fuel();
+       $gazoline->setName('Gazoline');
+       $this->addReference(self::GAZOLINE_FUEL_REFERENCE, $gazoline);
+       $manager->persist($gazoline);
+       $manager->flush();
     }
 }
