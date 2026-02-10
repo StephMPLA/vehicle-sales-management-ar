@@ -17,7 +17,7 @@ class Vehicle
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private string $name;
 
     #[ORM\Column]
