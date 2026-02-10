@@ -2,7 +2,7 @@
     <header class="absolute inset-x-0 top-0 z-50 border-b border-white/10 ">
         <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
             <div class="flex lg:flex-1">
-                <a href="#" class="-m-1.5 p-1.5">
+                <a href="{{ path('app_home') }}" class="-m-1.5 p-1.5">
                     {#                    <span class="sr-only">Your Company</span>#}
                     {#                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="" class="h-8 w-auto" />#}
                     <h1>Vehicle Sales</h1>
@@ -21,6 +21,13 @@
                 <a href="#" class="text-sm font-semibold">New Vehicles</a>
                 <a href="#" class="text-sm font-semibold">Used Vehicles</a>
                 <a href="#" class="text-sm font-semibold">About</a>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin_dashboard') }}">Admin space</a>
+                    {% else %}
+                        <a href="{{ path('app_user_dashboard') }}">Client space</a>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 <a href="{{ path('app_login') }}" class="text-sm/6 font-semibold">Log in <span aria-hidden="true">&rarr;</span></a>
