@@ -40,4 +40,11 @@ class VehicleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function countVehicles(): int
+    {
+        return $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\BrandRepository;
+use App\Repository\UserRepository;
+use App\Repository\VehicleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,9 +14,19 @@ final class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin_dashboard')]
     #[IsGranted('ROLE_ADMIN')]
-    public function dashboard(): Response
+    public function dashboard(
+        VehicleRepository $vehicleRepository,
+        BrandRepository $brandRepository,
+        UserRepository $userRepository
+    ): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        $clients = $userRepository->countUsers();
+        $vehicles = $vehicleRepository->countVehicles();
+        $brands = $brandRepository->countBrands();
+        return $this->render('admin/dashboard.html.twig',[
+            'clients' => $clients,
+            'vehicles' => $vehicles,
+            'brands' => $brands,
+        ]);
     }
-
 }

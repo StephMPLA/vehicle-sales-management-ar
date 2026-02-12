@@ -5,15 +5,16 @@
 {% block body %}
 
     {# HERO SECTION — IMAGE FOND #}
-    <section class="relative h-[100vh] flex items-center justify-center text-white">
+    <section class="relative h-[70vh] flex items-center justify-center text-white">
 
         <img src="{{ asset('images/alfaBg.jpg') }}"
-             class="absolute inset-0 w-full h-full object-cover"
+             class="absolute inset-0 w-full h-full object-cover object-[center_70%]"
              alt="Background">
 
         <div class="absolute inset-0 bg-black/60"></div>
 
-        <div class="relative text-center px-6">
+        <div class="relative text-center px-6 max-w-3xl w-full">
+
             <h1 class="text-4xl md:text-6xl font-bold mb-6">
                 Find your dream vehicle
             </h1>
@@ -22,18 +23,34 @@
                 Exceptional vehicles • Carefully selected • Fully inspected
             </p>
 
-            <a href="#vehicles"
-               class="bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
-                View vehicles
-            </a>
+            {# 🔎 Search form #}
+            <form method="get" action="#"
+                  class="flex flex-col md:flex-row gap-3 justify-center">
+
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search by brand, model, vehicle..."
+                    class="w-full md:w-96 px-5 py-4 rounded-lg text-gray-900 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg"
+                >
+
+                <button
+                    type="submit"
+                    class="bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
+                    Search
+                </button>
+
+            </form>
+
         </div>
 
     </section>
 
+
     <section id="vehicles" class="max-w-7xl mx-auto px-6 py-16">
 
         <h2 class="text-3xl font-bold mb-12 text-center">
-            Nos véhicules disponibles
+            our available vehicles
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
