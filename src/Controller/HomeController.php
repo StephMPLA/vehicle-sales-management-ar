@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Vehicle;
-use App\Repository\VehicleRepository;
+use App\Vehicle\Repository\VehicleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
