@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin — Add Vehicle{% endblock %}
+
+{% block body %}
+
+    <div class="min-h-screen bg-gray-100 py-10 px-6">
+
+        <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-10">
+
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    Add a New Vehicle
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Create a vehicle entry in the catalog
+                </p>
+            </div>
+
+            {{ form_start(form) }}
+
+            {# ================= IDENTIFICATION ================= #}
+
+            <h2 class="text-lg font-semibold mb-4 text-gray-700">
+                Identification
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    {{ form_label(form.brand, 'Brand') }}
+                    {{ form_widget(form.brand, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
+                    {{ form_errors(form.brand) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.name, 'Model name') }}
+                    {{ form_widget(form.name, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.category, 'Category') }}
+                    {{ form_widget(form.category, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
+                    {{ form_errors(form.category) }}
+                </div>
+
+            </div>
+
+            {# ================= TECH SPECS ================= #}
+
+            <h2 class="text-lg font-semibold mt-10 mb-4 text-gray-700">
+                Technical specifications
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    {{ form_label(form.year) }}
+                    {{ form_widget(form.year, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.horsePower, 'Horse power') }}
+                    {{ form_widget(form.horsePower, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.weight, 'Weight (kg)') }}
+                    {{ form_widget(form.weight, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.fuel, 'Fuel type') }}
+                    {{ form_widget(form.fuel, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.transmission, 'Transmission') }}
+                    {{ form_widget(form.transmission, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
+                </div>
+
+            </div>
+
+            {# ================= COMMERCIAL ================= #}
+
+            <h2 class="text-lg font-semibold mt-10 mb-4 text-gray-700">
+                Commercial data
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    {{ form_label(form.price, 'Price (€)') }}
+                    {{ form_widget(form.price, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.mileage, 'Mileage (km)') }}
+                    {{ form_widget(form.mileage, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.status, 'Status') }}
+                    {{ form_widget(form.status, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
+                </div>
+
+            </div>
+
+            <div class="mt-4 flex items-center gap-3">
+                {{ form_widget(form.isNew, { attr: { class: 'h-4 w-4' } }) }}
+                <span class="text-sm text-gray-700">Brand new vehicle</span>
+            </div>
+
+            {# ================= DESCRIPTION ================= #}
+
+            <h2 class="text-lg font-semibold mt-10 mb-4 text-gray-700">
+                Description & Media
+            </h2>
+
+            <div class="space-y-6">
+
+                <div>
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description, {
+                        attr: { class: 'w-full border rounded-lg px-3 py-2 h-32' }
+                    }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.model3dPath, '3D model path (optional)') }}
+                    {{ form_widget(form.model3dPath, {
+                        attr: { class: 'w-full border rounded-lg px-3 py-2' }
+                    }) }}
+                </div>
+
+            </div>
+
+            {# ================= ACTIONS ================= #}
+
+            <div class="flex justify-between items-center mt-12">
+
+                <a href="{{ path('app_admin_dashboard') }}"
+                   class="text-gray-500 hover:text-gray-800 text-sm">
+                    ← Back to dashboard
+                </a>
+
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow">
+                    Save vehicle
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}

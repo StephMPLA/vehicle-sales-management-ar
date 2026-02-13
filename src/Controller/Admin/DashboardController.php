@@ -24,6 +24,7 @@ final class DashboardController extends AbstractController
         'vehicles'=> $stats['vehicles'],
             'brands'=> $stats['brands'],
             'clients'=> $stats['clients'],
+            'vehiclesView' => $stats['vehiclesView'],
         ]);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Brand\Entity\Brand;
-use App\Category\Entity\Category;
-use App\Fuel\Entity\Fuel;
-use App\Vehicle\Entity\Vehicle;
-use App\VehicleStatus\Entity\VehicleStatus;
+use App\Entity\Brand;
+use App\Entity\Category;
+use App\Entity\Fuel;
+use App\Entity\Vehicle;
+use App\Entity\VehicleStatus;
 use App\VehicleTramsission\Entity\VehicleTransmission;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
