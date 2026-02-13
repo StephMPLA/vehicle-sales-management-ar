@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\VehicleStatus\Entity\VehicleStatus;
+use App\Entity\VehicleStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

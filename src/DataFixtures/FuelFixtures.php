@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Fuel\Entity\Fuel;
+use App\Entity\Fuel;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

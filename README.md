@@ -1,33 +1,45 @@
 # Vehicle Sales Management AR
 
-Recruiter-focused demo project built with **Symfony** to showcase backend architecture, **Domain-Driven Design (DDD)** principles, entity modeling, and a reservation workflow for a vehicle sales platform.
+Recruiter-focused demo project built with **Symfony** to showcase a clean **MVC backend architecture**, entity modeling, admin CRUD workflows, and a reservation flow for a vehicle sales platform.
 
-The application allows users to browse vehicles, check availability, submit reservation requests, and preview selected models in augmented reality (3D). A UML class diagram is included to document and explain the domain design.
+The application allows users to browse vehicles, manage catalog data, handle reservation requests, and preview selected models in augmented reality (3D). A UML class diagram is included to document the domain structure.
 
 ---
 
 ## Project Goals
 
-This project was designed as a **technical portfolio piece** to demonstrate:
+This project was created as a **technical portfolio piece** to demonstrate:
 
-- Clean backend architecture with Symfony
-- Domain-Driven Design (DDD) approach
-- Rich domain modeling with Doctrine ORM
-- Structured reservation workflow
-- DTO usage for input handling
-- Separation of concerns (Controller / Domain / Persistence)
-- Maintainable and extensible codebase
-- Recruiter-readable technical structure
+- Clean Symfony MVC architecture
+- Doctrine entity modeling and relationships
+- Admin CRUD workflows
+- Secure form handling with Symfony Forms
+- CSRF protection and role-based access
+- Maintainable backend structure
+- Recruiter-readable code organization
+- Realistic domain dataset with fixtures
 
 ---
 
-## Architecture & DDD Approach
+## Architecture
 
-The project follows a **DDD-inspired structure** with a strong focus on domain clarity and responsibility separation.
+The project follows a **standard Symfony MVC structure**.
 
-### Domain Modeling
+### Layers
 
-Core domain entities include:
+- **Controllers** — handle HTTP requests and admin workflows
+- **Entities** — represent core business objects
+- **Repositories** — encapsulate database access (Doctrine)
+- **Forms** — Symfony Form components bound directly to entities
+- **Twig templates** — admin UI rendering
+
+This approach favors clarity, maintainability, and fast development while staying aligned with common Symfony production practices.
+
+---
+
+## Domain Model
+
+Core entities include:
 
 - Vehicle
 - Brand
@@ -37,31 +49,37 @@ Core domain entities include:
 - VehicleStatus
 - ReservationRequest
 - VehicleImage
+- User (admin / client)
 
-The domain model is designed around business meaning rather than technical shortcuts.
+Relationships are modeled using Doctrine ORM with proper constraints and associations.
 
-### Key Design Choices
-
-- Entities centered on business concepts
-- Doctrine repositories used as persistence layer abstractions
-- Progressive introduction of DTO pattern
-- Fixtures reflect realistic domain data
-- Business rules expressed at domain/entity level where relevant
-- UML class diagram included for domain documentation
+A UML class diagram is included to document and explain the domain structure.
 
 ---
 
 ## Features
 
-- Vehicle catalog browsing
-- Structured domain entities and relationships
+- Vehicle catalog management (admin)
 - Brand / category / fuel / transmission management
-- Vehicle availability tracking
+- Vehicle status tracking
 - Reservation request workflow
+- Admin dashboard with KPIs
+- Secure create/edit/delete operations (CSRF protected)
+- Symfony Forms bound to entities
+- Doctrine fixtures for reproducible datasets
 - Optional vehicle image handling
 - 3D / AR model preview support
-- Doctrine fixtures for reproducible datasets
-- UML class diagram included
+- Admin role-based access control
+
+---
+
+## Security
+
+- Symfony Security component
+- Role-based access (ROLE_ADMIN / ROLE_USER)
+- CSRF protection on sensitive operations
+- Secure delete via POST + token
+- Authentication success handler (role-based redirect)
 
 ---
 
@@ -73,14 +91,16 @@ The domain model is designed around business meaning rather than technical short
 - MySQL
 - Twig
 - Symfony Forms
+- Symfony Security
 - Doctrine Fixtures Bundle
+- Tailwind CSS (admin UI)
 
 ---
 
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/vehicle-sales-management-ar.git
+git clone https://github.com/StephMPLA/vehicle-sales-management-ar.git
 cd vehicle-sales-management-ar
 
 composer install

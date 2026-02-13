@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Vehicle\Repository\VehicleRepository;
+use App\Repository\VehicleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,10 +13,9 @@ final class HomeController extends AbstractController
     public function index(VehicleRepository $vehicleRepository): Response
     {
         //Todo afficher le nombre de véhicules disponible sur le site
-        $allVehicle = $vehicleRepository->findAll();
+        $allVehicle = $vehicleRepository->countVehicles();
         //Todo afficher le nombre de marques
         //Todo Afficher les cards de véhicules récemment ajoutés
-
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

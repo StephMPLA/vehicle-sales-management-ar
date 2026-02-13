@@ -2,9 +2,10 @@
 
 namespace App\Admin\Service;
 
-use App\Vehicle\Repository\VehicleRepository;
-use App\Brand\Repository\BrandRepository;
-use App\User\Repository\UserRepository;
+use App\Repository\BrandRepository;
+use App\Repository\UserRepository;
+use App\Repository\VehicleRepository;
+
 /**
  * Application service responsible for computing
  * global statistics displayed in the admin dashboard.
@@ -28,6 +29,7 @@ class DashboardStatsService
             'vehicles' => $this->vehicleRepository->countVehicles(),
             'brands'   => $this->brandRepository->countBrands(),
             'clients'  => $this->userRepository->countUsers(),
+            'vehiclesView' =>  $this->vehicleRepository->getVehicles(),
         ];
     }
 }
