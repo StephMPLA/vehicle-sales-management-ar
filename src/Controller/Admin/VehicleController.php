@@ -4,18 +4,23 @@ namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
 use App\Form\VehicleType;
+use App\Vehicle\Service\VehicleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 final class VehicleController extends AbstractController
 {
     #[Route('/admin/vehicle/new', name: 'app_admin_vehicle_new')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(
+        Request $request,
+        VehicleService $vehicleService
+    ): Response
     {
         $vehicle = new Vehicle();
 
@@ -24,8 +29,7 @@ final class VehicleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em->persist($vehicle);
-            $em->flush();
+            $vehicleService->create($vehicle);
 
             $this->addFlash('success', 'Vehicle created.');
 
@@ -37,22 +41,31 @@ final class VehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/vehicle/{id}/delete', name: 'app_admin_vehicle_delete', methods: ['POST'])]
-    public function delete(
+    #[Route('/admin/vehicle/{id}/edit', name: 'app_admin_vehicle_edit', methods: ['GET','POST'])]
+    public function edit(
         Request $request,
         Vehicle $vehicle,
-        EntityManagerInterface $em
+        VehicleService $vehicleService
     ): Response {
 
-        if ($this->isCsrfTokenValid('delete_vehicle_'.$vehicle->getId(), $request->request->get('_token'))) {
+        $form = $this->createForm(VehicleType::class, $vehicle);
 
-            $em->remove($vehicle);
-            $em->flush();
+        $form->handleRequest($request);
 
-            $this->addFlash('success', 'Vehicle deleted');
+        if ($form->isSubmitted() && $form->isValid()) {
+
+           $vehicleService->update($vehicle);
+
+            $this->addFlash('success', 'Vehicle updated');
+
+            return $this->redirectToRoute('app_admin_dashboard');
+
         }
 
-        return $this->redirectToRoute('app_admin_dashboard');
+        return $this->render('admin/vehicle/edit.html.twig', [
+            'form' => $form->createView(),
+            'vehicle' => $vehicle
+        ]);
     }
 
 

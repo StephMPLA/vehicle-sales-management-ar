@@ -2,7 +2,7 @@
 {% block title %}Admin — Dashboard{% endblock %}
 
  {% block javascripts %}
-     <script src="{{ asset('js/addVehicle.js') }}"></script>
+     <script src="{{ asset('js/admin-vehicles.js') }}"></script>
  {% endblock %}
 
 {% block body %}
@@ -33,7 +33,7 @@
 
             <div class="bg-white p-5 rounded-xl shadow">
                 <p class="text-sm text-gray-500">Véhicules</p>
-                <p class="text-3xl font-bold">
+                <p id="vehicle-count" class="text-3xl font-bold">
                     {{ vehicles }}
                 </p>
             </div>
@@ -127,6 +127,7 @@
                            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm">
                             Add vehicle
                         </a>
+
 
                         <a href="#"
                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-sm">
@@ -222,27 +223,20 @@
                                     Voir
                                 </a>
 
-                                <a href="#" class="text-gray-600 hover:underline">
-                                    Éditer
-                                </a>
+                                <button class="text-gray-600 hover:underline btn-edit"
+                                        data-id="{{ v.id }}">
+                                    Edit
+                                </button>
 
-                                <form method="post"
-                                      action="{{ path('app_admin_vehicle_delete', {id: v.id}) }}"
-                                      style="display:inline"
-                                      onsubmit="return confirm('Supprimer ce véhicule ?');">
-
-                                    <input type="hidden" name="_token"
-                                           value="{{ csrf_token('delete_vehicle_' ~ v.id) }}">
-
-                                    <button class="text-red-600 hover:underline">
-                                        Supprimer
-                                    </button>
-                                </form>
-
-
+                                <button
+                                    class="text-red-600 hover:underline btn-delete"
+                                    data-id="{{ v.id }}"
+                                    data-token="{{ csrf_token('delete_vehicle_' ~ v.id) }}"
+                                >
+                                    Supprimer
+                                </button>
                             </div>
                         </td>
-
                     </tr>
                 {% else %}
                     <tr>
