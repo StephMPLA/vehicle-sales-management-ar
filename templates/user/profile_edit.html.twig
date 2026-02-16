@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My profile{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/cityApi.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+    <div class="max-w-xl mx-auto mt-10 bg-white shadow rounded-xl p-8">
+
+        <h1 class="text-2xl font-bold mb-6">My profile</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, { attr: { class: 'space-y-4' } }) }}
+
+        {{ form_row(form.email) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.phone) }}
+        <div class="relative">
+            {{ form_row(form.city, {
+                attr: { id: 'city-input', autocomplete: 'off' }
+            }) }}
+        </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
+            Save
+        </button>
+
+        {{ form_end(form) }}
+
+        <ul id="city-suggestions"
+            class="border rounded mt-2 bg-white shadow hidden">
+        </ul>
+    </div>
+{% endblock %}

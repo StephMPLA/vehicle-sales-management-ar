@@ -29,9 +29,16 @@
                     {% endif %}
                 {% endif %}
             </div>
+            {% if app.user %}
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="{{ path('app_login') }}" class="text-sm/6 font-semibold">Log in <span aria-hidden="true">&rarr;</span></a>
+                <a href="{{ path('app_logout') }}" class="text-sm/6 font-semibold">Log out <span aria-hidden="true">&rarr;</span></a>
             </div>
+            {% else %}
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <a href="{{ path('app_login') }}" class="text-sm/6 font-semibold">Log in <span aria-hidden="true">&rarr;</span></a>
+                </div>
+            {% endif %}
+
         </nav>
         <el-dialog>
             <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
@@ -57,9 +64,22 @@
                                     <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold  hover:bg-white/5">Used Vehicles</a>
                                     <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold  hover:bg-white/5">About</a>
                                 </div>
-                                <div class="py-6">
-                                    <a href="{{ path('app_login') }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold  hover:bg-white/5">Log in</a>
-                                </div>
+                                {% if app.user %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('app_admin_dashboard') }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold  hover:bg-white/5">Admin space</a>
+                                    {% else %}
+                                        <a href="{{ path('app_user_dashboard') }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold  hover:bg-white/5">Client space</a>
+                                    {% endif %}
+                                {% endif %}
+                                {% if app.user %}
+                                    <div class="py-6">
+                                        <a href="{{ path('app_logout') }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold  hover:bg-white/5">Log out</a>
+                                    </div>
+                                {% else %}
+                                    <div class="py-6">
+                                        <a href="{{ path('app_login') }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold  hover:bg-white/5">Log in</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </el-dialog-panel>
