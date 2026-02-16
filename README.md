@@ -1,39 +1,75 @@
 # Vehicle Sales Management AR
 
-Recruiter-focused demo project built with **Symfony** to showcase a clean **MVC backend architecture**, entity modeling, admin CRUD workflows, and a reservation flow for a vehicle sales platform.
+Recruiter-focused demo project built with **Symfony** to demonstrate a clean backend architecture, admin CRUD workflows, and a realistic vehicle catalog domain.  
+The project also includes a small REST API endpoint used for dynamic UI updates without page reload.
 
-The application allows users to browse vehicles, manage catalog data, handle reservation requests, and preview selected models in augmented reality (3D). A UML class diagram is included to document the domain structure.
+The application allows administrators to manage a vehicle catalog, handle related reference data, process reservation requests, and preview selected vehicles in 3D / AR. An admin dashboard displays KPIs that update dynamically after certain actions.
 
 ---
 
-## Project Goals
+## Project Purpose
 
-This project was created as a **technical portfolio piece** to demonstrate:
+This project was created as a **technical portfolio project** to showcase practical Symfony backend skills on a realistic use case.
 
-- Clean Symfony MVC architecture
+It demonstrates:
+
+- Symfony MVC architecture
+- Admin CRUD operations
 - Doctrine entity modeling and relationships
-- Admin CRUD workflows
-- Secure form handling with Symfony Forms
-- CSRF protection and role-based access
-- Maintainable backend structure
-- Recruiter-readable code organization
-- Realistic domain dataset with fixtures
+- Symfony Forms usage
+- Service layer pattern
+- Secure delete workflow
+- Partial REST API integration
+- AJAX UI updates without reload
+- Clean and readable code structure
 
 ---
 
-## Architecture
+## Architecture Overview
 
-The project follows a **standard Symfony MVC structure**.
+The project mainly follows a **Symfony MVC architecture** for pages and forms, combined with a **targeted REST API layer** for dynamic operations.
 
-### Layers
+### MVC Layer
 
-- **Controllers** — handle HTTP requests and admin workflows
-- **Entities** — represent core business objects
-- **Repositories** — encapsulate database access (Doctrine)
-- **Forms** — Symfony Form components bound directly to entities
-- **Twig templates** — admin UI rendering
+- Controllers — handle admin pages and workflows
+- Entities — domain objects mapped with Doctrine ORM
+- Repositories — database access logic
+- Symfony Forms — bound directly to entities
+- Twig templates — admin interface rendering
+- Services — encapsulate persistence operations (create / update / delete)
 
-This approach favors clarity, maintainability, and fast development while staying aligned with common Symfony production practices.
+This keeps controllers thin and improves maintainability.
+
+### REST API (Targeted Usage)
+
+A REST endpoint is implemented for vehicle deletion:
+
+- `DELETE /api/admin/vehicles/{id}`
+- JSON request with CSRF token
+- Deletion handled via service layer
+- Triggered using JavaScript `fetch()`
+- Table row removed dynamically in the UI
+- Vehicle KPI counter refreshed via API
+- No full page reload required
+
+This demonstrates practical REST usage alongside MVC.
+
+---
+
+## Main Features
+
+- Admin vehicle catalog management
+- Create and edit vehicles with Symfony Forms
+- Reference data management (brand, category, fuel, transmission, status)
+- Vehicle status tracking
+- Reservation request entity and workflow
+- Admin dashboard with KPI counters
+- Secure delete via REST + AJAX
+- Live KPI refresh after deletion
+- Doctrine fixtures for demo dataset
+- Optional vehicle image handling
+- 3D / AR model preview support
+- Role-based access control
 
 ---
 
@@ -45,41 +81,41 @@ Core entities include:
 - Brand
 - Category
 - Fuel
-- Transmission
+- VehicleTransmission
 - VehicleStatus
-- ReservationRequest
 - VehicleImage
-- User (admin / client)
+- ReservationRequest
+- User
 
-Relationships are modeled using Doctrine ORM with proper constraints and associations.
+Doctrine relationships are properly mapped with constraints and associations.
 
-A UML class diagram is included to document and explain the domain structure.
-
----
-
-## Features
-
-- Vehicle catalog management (admin)
-- Brand / category / fuel / transmission management
-- Vehicle status tracking
-- Reservation request workflow
-- Admin dashboard with KPIs
-- Secure create/edit/delete operations (CSRF protected)
-- Symfony Forms bound to entities
-- Doctrine fixtures for reproducible datasets
-- Optional vehicle image handling
-- 3D / AR model preview support
-- Admin role-based access control
+A UML class diagram is included to document the domain structure.
 
 ---
 
 ## Security
 
 - Symfony Security component
-- Role-based access (ROLE_ADMIN / ROLE_USER)
-- CSRF protection on sensitive operations
-- Secure delete via POST + token
-- Authentication success handler (role-based redirect)
+- Role-based access control (ROLE_ADMIN / ROLE_USER)
+- Admin routes protected with attributes
+- CSRF protection on forms
+- CSRF validation on REST delete endpoint
+- Secure delete workflow (token + role check)
+- Authentication success redirect by role
+
+---
+
+## Technical Highlights
+
+- Symfony MVC + service layer pattern
+- Doctrine ORM with multiple relationships
+- Entity-driven Symfony Forms
+- REST DELETE endpoint
+- JSON request/response handling
+- AJAX delete with fetch API
+- Dynamic UI synchronization after server mutation
+- Dashboard KPI refresh via API call
+- Clean separation of concerns
 
 ---
 
@@ -94,6 +130,7 @@ A UML class diagram is included to document and explain the domain structure.
 - Symfony Security
 - Doctrine Fixtures Bundle
 - Tailwind CSS (admin UI)
+- Vanilla JavaScript (fetch / AJAX)
 
 ---
 

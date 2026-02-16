@@ -10,10 +10,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 /**
  * Displays the admin dashboard with global system statistics.
  */
+#[IsGranted('ROLE_ADMIN')]
 final class DashboardController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin_dashboard')]
-    #[IsGranted('ROLE_ADMIN')]
     public function dashboard(
         DashboardStatsService $statsService
     ): Response

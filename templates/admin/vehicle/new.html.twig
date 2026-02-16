@@ -99,7 +99,7 @@
                     {{ form_label(form.mileage, 'Mileage (km)') }}
                     {{ form_widget(form.mileage, { attr: { class: 'w-full border rounded-lg px-3 py-2' } }) }}
                 </div>
-
+{#                mileage > 0 alors isnew = false in typeform ou constructeur entity, mapped false#}
                 <div>
                     {{ form_label(form.status, 'Status') }}
                     {{ form_widget(form.status, { attr: { class: 'w-full border rounded-lg px-3 py-2 bg-white' } }) }}
