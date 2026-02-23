@@ -1,0 +1,24 @@
+<div class="border rounded p-3 shadow bg-white"
+     data-image-id="{{ image.id }}">
+
+    <img src="{{ image.path }}"
+         class="w-full h-40 object-cover rounded mb-3"
+         alt="{{ image.alt ?? '' }}">
+
+    <div class="text-xs text-gray-600 mb-2">
+        {{ image.type.value }}
+    </div>
+
+    <button type="button"
+            class="delete-image block w-full text-center
+                   bg-red-600 hover:bg-red-700
+                   text-white py-1.5 rounded text-sm"
+            data-delete-url="{{ path(
+                'app_admin_vehicle_image_delete_ajax',
+                { id: image.id }
+            ) }}"
+            data-csrf="{{ csrf_token('vehicle_image_delete_' ~ image.id) }}">
+        Delete
+    </button>
+
+</div>

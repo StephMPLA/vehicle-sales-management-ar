@@ -56,3 +56,27 @@ async function refreshVehicleCount() {
         el.textContent = data.count;
     }
 }
+
+
+document.addEventListener('click', async e => {
+
+    const btn = e.target.closest('.delete-image');
+    if (!btn) return;
+
+    if (!confirm('Delete image ?')) return;
+
+    const id = btn.dataset.id;
+
+    const response = await fetch(
+        `/admin/vehicle/image/${id}`,
+        {
+            method: 'DELETE'
+        }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+        btn.closest('[data-image-id]').remove();
+    }
+});
