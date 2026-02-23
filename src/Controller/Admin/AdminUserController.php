@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class AdminUserController extends AbstractController
 {
-    #[Route('/admin/user/{id}', name: 'admin_user_show')]
+    #[Route('/admin/user/{id}', name: 'admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('admin/user/show.html.twig', [
