@@ -44,18 +44,45 @@ class VehicleRepository extends ServiceEntityRepository
     /**
      * Returns the total number of vehicles stored in database.
      */
-    public function countVehicles(): int
+    public function getDashboardStats(): array
     {
         return $this->createQueryBuilder('v')
-            ->select('COUNT(v.id)')
+            ->select('COUNT(v.id) as vehicles')
+            ->addSelect('COUNT(DISTINCT b.id) as brands')
+            ->join('v.brand', 'b')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleResult();
     }
 
     public function getVehicles(): array
     {
         return $this->createQueryBuilder('v')
             ->select('v')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAvailable(): array
+    {
+        return $this->createQueryBuilder('v')
+            ->leftJoin('v.images', 'i')->addSelect('i')
+            ->leftJoin('v.brand', 'b')->addSelect('b')
+            ->leftJoin('v.category', 'c')->addSelect('c')
+            ->leftJoin('v.fuel', 'f')->addSelect('f')
+            ->leftJoin('v.transmission', 't')->addSelect('t')
+            ->leftJoin('v.status', 's')
+            ->where('s.name = :status')
+            ->setParameter('status', 'Available')
+            ->orderBy('v.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function getVehiclesUsed(): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v')
+            ->where('v.used = :used')
+            ->setParameter('used', true)
             ->getQuery()
             ->getResult();
     }

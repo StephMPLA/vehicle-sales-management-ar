@@ -24,3 +24,21 @@ footer
 {
     margin: 3rem;
 }
+.carousel-fullscreen {
+    position: fixed !important;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 9999;
+    padding: 40px;
+    overflow-y: auto; /* IMPORTANT */
+}
+.carousel-fullscreen {
+    overflow-y: auto;
+}
+
+.carousel-fullscreen img {
+    max-height: none;
+    object-fit: contain;
+}

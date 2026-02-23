@@ -70,4 +70,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getSingleScalarResult();
     }
+    public function findClients(int $limit = 10): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles NOT LIKE :admin')
+            ->setParameter('admin', '%"ROLE_ADMIN"%')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

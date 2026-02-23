@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 final class DashboardController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin_dashboard')]
+    #[Route('/admin', name: 'app_admin_dashboard', methods: ['GET'])]
     public function dashboard(
         DashboardStatsService $statsService
     ): Response
@@ -21,9 +21,10 @@ final class DashboardController extends AbstractController
         $stats = $statsService->getStats();
 
         return $this->render('admin/dashboard.html.twig',[
-        'vehicles'=> $stats['vehicles'],
-            'brands'=> $stats['brands'],
-            'clients'=> $stats['clients'],
+            'vehicleCount' => $stats['vehicleCount'],
+            'brandCount'   => $stats['brandCount'],
+            'clientCount'  => $stats['clientCount'],
+            'clientsList'  => $stats['clientsList'],
             'vehiclesView' => $stats['vehiclesView'],
         ]);
     }

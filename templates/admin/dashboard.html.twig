@@ -2,7 +2,7 @@
 {% block title %}Admin — Dashboard{% endblock %}
 
  {% block javascripts %}
-     <script src="{{ asset('js/admin-vehicles.js') }}"></script>
+     <script src="{{ asset('js/admin/vehicles/vehicle-delete.js') }}"></script>
  {% endblock %}
 
 {% block body %}
@@ -34,21 +34,21 @@
             <div class="bg-white p-5 rounded-xl shadow">
                 <p class="text-sm text-gray-500">Véhicules</p>
                 <p id="vehicle-count" class="text-3xl font-bold">
-                    {{ vehicles }}
+                    {{ vehicleCount }}
                 </p>
             </div>
 
             <div class="bg-white p-5 rounded-xl shadow">
                 <p class="text-sm text-gray-500">Clients</p>
                 <p class="text-3xl font-bold">
-                   {{ clients }}
+                    {{ clientCount }}
                 </p>
             </div>
 
             <div class="bg-white p-5 rounded-xl shadow">
                 <p class="text-sm text-gray-500">Marques</p>
                 <p class="text-3xl font-bold">
-                    {{ brands }}
+                    {{ brandCount }}
                 </p>
                 {# futur backend: brands repo #}
             </div>
@@ -78,23 +78,22 @@
 
                 <thead class="bg-gray-50 text-xs uppercase text-gray-600">
                 <tr>
-                    <th class="px-4 py-3 text-left">Email</th>
                     <th class="px-4 py-3 text-left">Nom</th>
+                    <th class="px-4 py-3 text-left">Email</th>
                     <th class="px-4 py-3 text-center">Actions</th>
                 </tr>
                 </thead>
 
                 <tbody class="divide-y">
 
-                {% for c in clients|default([])|slice(0,10) %}
+                {% for c in clientsList %}
                     <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3">{{ c.lastname ?? '—' }}</td>
                         <td class="px-4 py-3">{{ c.email }}</td>
-                        <td class="px-4 py-3">{{ c.name ?? '—' }}</td>
 
                         <td class="px-4 py-3 text-center">
                             <div class="flex justify-center gap-3 text-xs">
                                 <a href="#" class="text-blue-600 hover:underline">Voir</a>
-                                <a href="#" class="text-gray-600 hover:underline">Éditer</a>
                             </div>
                         </td>
                     </tr>
@@ -218,14 +217,15 @@
                         <td class="px-4 py-3 text-center">
                             <div class="flex justify-center gap-3 text-xs">
 
-                                <a href="#" class="text-blue-600 hover:underline">
+                                <a href="{{ path('app_vehicle_show', {id: v.id}) }}"
+                                   class="text-gray-600 hover:underline">
                                     Voir
                                 </a>
 
-                                <button class="text-gray-600 hover:underline btn-edit"
-                                        data-id="{{ v.id }}">
+                                <a href="{{ path('app_admin_vehicle_edit', {id: v.id}) }}"
+                                   class="text-gray-600 hover:underline">
                                     Edit
-                                </button>
+                                </a>
 
                                 <button
                                     class="text-red-600 hover:underline btn-delete"

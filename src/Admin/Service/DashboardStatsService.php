@@ -26,10 +26,11 @@ class DashboardStatsService
     public function getStats(): array
     {
         return [
-            'vehicles' => $this->vehicleRepository->countVehicles(),
-            'brands'   => $this->brandRepository->countBrands(),
-            'clients'  => $this->userRepository->countUsers(),
-            'vehiclesView' =>  $this->vehicleRepository->getVehicles(),
+            'vehicleCount' => $this->vehicleRepository->count([]),
+            'brandCount'   => $this->brandRepository->count([]),
+            'clientCount'  => $this->userRepository->countUsers(),
+            'clientsList'  => $this->userRepository->findClients(),
+            'vehiclesView' => $this->vehicleRepository->findBy([], ['id'=>'DESC'], 10),
         ];
     }
 }

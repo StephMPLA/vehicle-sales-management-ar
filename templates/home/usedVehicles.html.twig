@@ -4,82 +4,80 @@
 
 {% block body %}
 
-    {# HERO SECTION — IMAGE FOND #}
-    <section class="relative h-[70vh] flex items-center justify-center text-white">
+{#    #}{# HERO SECTION — IMAGE FOND #}
+{#    <section class="relative h-[70vh] flex items-center justify-center text-white">#}
 
-        <img src="{{ asset('images/alfaBg.jpg') }}"
-             class="absolute inset-0 w-full h-full object-cover object-[center_70%]"
-             alt="Background">
+{#        <img src="{{ asset('images/alfaBg.jpg') }}"#}
+{#             class="absolute inset-0 w-full h-full object-cover object-[center_70%]"#}
+{#             alt="Background">#}
 
-        <div class="absolute inset-0 bg-black/60"></div>
+{#        <div class="absolute inset-0 bg-black/60"></div>#}
 
-        <div class="relative text-center px-6 max-w-3xl w-full">
+{#        <div class="relative text-center px-6 max-w-3xl w-full">#}
 
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                Find your dream vehicle
-            </h1>
+{#            <h1 class="text-4xl md:text-6xl font-bold mb-6">#}
+{#                Find your dream vehicle#}
+{#            </h1>#}
 
-            <p class="text-lg md:text-xl mb-8 text-gray-200">
-                Exceptional vehicles • Carefully selected • Fully inspected
-            </p>
+{#            <p class="text-lg md:text-xl mb-8 text-gray-200">#}
+{#                Exceptional vehicles • Carefully selected • Fully inspected#}
+{#            </p>#}
 
-            {# 🔎 Search form #}
-            <form method="get" action="#"
-                  class="flex flex-col md:flex-row gap-3 justify-center">
+{#            #}{# 🔎 Search form #}
+{#            <form method="get" action="#"#}
+{#                  class="flex flex-col md:flex-row gap-3 justify-center">#}
 
-                <input
-                    type="text"
-                    name="q"
-                    placeholder="Search by brand, model or vehicle..."
-                    class="w-full md:w-96 px-5 py-4 rounded-lg text-gray-900 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg"
-                >
+{#                <input#}
+{#                    type="text"#}
+{#                    name="q"#}
+{#                    placeholder="Search by brand, model or vehicle..."#}
+{#                    class="w-full md:w-96 px-5 py-4 rounded-lg text-gray-900 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg"#}
+{#                >#}
 
-                <button
-                    type="submit"
-                    class="bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
-                    Search
-                </button>
+{#                <button#}
+{#                    type="submit"#}
+{#                    class="bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">#}
+{#                    Search#}
+{#                </button>#}
 
-            </form>
+{#            </form>#}
 
-        </div>
+{#        </div>#}
 
-    </section>
+{#    </section>#}
 
 
     <section id="vehicles" class="max-w-7xl mx-auto px-6 py-16">
 
-        {# ================= COUNTERS ================= #}
-        <div class="grid grid-cols-2 gap-10 mb-12  p-1 text-center">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+            Vehicles Available
+        </h2>
 
-            <div class="bg-white p-6 rounded-xl shadow-xl">
+        {# ================= COUNTERS ================= #}
+        <div class="grid grid-cols-2 gap-6 mb-12 text-center">
+
+            <div class="bg-white p-6 rounded shadow">
                 <div class="text-3xl font-bold">
                     {{ vehicleCount.vehicles }}
                 </div>
                 {% if vehicleCount.vehicles > 1 %}
-                <div class="text-gray-500">
-                    Vehicles available
-                </div>
+                    <div class="text-gray-500">
+                        Vehicles available
+                    </div>
                 {% else %}
-                <div class="text-gray-500">
-                    Vehicle available
-                </div>
+                    <div class="text-gray-500">
+                        Vehicle available
+                    </div>
                 {% endif %}
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-xl">
+            <div class="bg-white p-6 rounded shadow">
                 <div class="text-3xl font-bold">
                     {{ vehicleCount.brands }}
                 </div>
-                {% if vehicleCount.brands > 1 %}
-                    <div class="text-gray-500">
-                        Brands
-                    </div>
-                {% else %}
-                    <div class="text-gray-500">
-                        brand
-                    </div>
-                {% endif %}
+                <div class="text-gray-500">
+                    Brands
+                </div>
             </div>
 
         </div>
@@ -96,11 +94,11 @@
 
                 {% for v in vehicles %}
                     <a href="{{ path('app_vehicle_show', {id: v.id}) }}"
-                       class="block bg-white rounded-xl shadow-xs overflow-hidden hover:shadow-xl hover:-translate-y-1 discoursetransition">
+                       class="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 discoursetransition">
 
                         {# IMAGE PRINCIPALE #}
                         {% if v.images|length > 0 %}
-                            <img src="{{ v.images|first.path }}"
+                            <img src="/uploads/vehicles/{{ v.images|first.path }}"
                                  alt="{{ v.images|first.alt }}"
                                  class="w-full h-56 object-cover">
                         {% else %}
