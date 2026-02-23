@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche client</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 28px; font-size: 12px; }
+        h1 { font-size: 18px; margin: 0 0 12px 0; }
+        .section { border: 1px solid #ddd; padding: 12px; margin-bottom: 12px; }
+        .label { color: #666; font-size: 11px; }
+        .value { font-weight: 600; margin-top: 2px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Fiche client — {{ client.fullName }}</h1>
+
+<div class="section">
+    <div class="grid">
+        <div>
+            <div class="label">Email</div>
+            <div class="value">{{ client.email }}</div>
+        </div>
+        <div>
+            <div class="label">Téléphone</div>
+            <div class="value">{{ client.phone ?? '—' }}</div>
+        </div>
+        <div>
+            <div class="label">Ville</div>
+            <div class="value">{{ client.city ?? '—' }}</div>
+        </div>
+        <div>
+            <div class="label">Créé le</div>
+            <div class="value">{{ client.createdAt|date('d/m/Y') }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="label">Adresse</div>
+    <div class="value">
+        {{ client.address ?? '—' }}<br>
+        {{ client.postalCode ?? '' }} {{ client.city ?? '' }}
+    </div>
+</div>
+
+</body>
+</html>

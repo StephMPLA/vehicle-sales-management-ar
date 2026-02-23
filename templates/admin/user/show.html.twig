@@ -88,11 +88,17 @@
                             📞 Appeler
                         </a>
 
-                        <button
-                            onclick="window.print()"
-                            class="bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-lg">
-                            🖨 Imprimer fiche client
-                        </button>
+{#                        <button#}
+{#                            onclick="window.print()"#}
+{#                            class="bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-lg">#}
+{#                            🖨 Imprimer fiche client#}
+{#                        </button>#}
+
+                        <a href="{{ path('admin_client_pdf',{id: client.id}) }}"
+                           class="bg-green-600 hover:bg-green-700 text-white text-center py-2 rounded-lg">
+                            📄 Générer le PDF client
+                        </a>
+
 
                     </div>
                 </div>

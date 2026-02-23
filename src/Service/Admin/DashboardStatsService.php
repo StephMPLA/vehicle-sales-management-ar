@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Service;
+namespace App\Service\Admin;
 
 use App\Repository\BrandRepository;
 use App\Repository\UserRepository;

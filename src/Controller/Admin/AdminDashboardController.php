@@ -2,11 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use App\Admin\Service\DashboardStatsService;
+use App\Service\Admin\DashboardStatsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 /**
  * Displays the admin dashboard with global system statistics.
  */
