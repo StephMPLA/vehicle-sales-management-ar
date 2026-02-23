@@ -20,7 +20,7 @@ final class AdminDashboardController extends AbstractController
     {
         $stats = $statsService->getStats();
 
-        return $this->render('admin_dashboard.html.twig',[
+        return $this->render('admin/admin_dashboard.html.twig',[
             'vehicleCount' => $stats['vehicleCount'],
             'brandCount'   => $stats['brandCount'],
             'clientCount'  => $stats['clientCount'],
