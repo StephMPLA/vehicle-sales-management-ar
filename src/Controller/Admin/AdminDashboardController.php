@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  * Displays the admin dashboard with global system statistics.
  */
 #[IsGranted('ROLE_ADMIN')]
-final class DashboardController extends AbstractController
+final class AdminDashboardController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin_dashboard', methods: ['GET'])]
     public function dashboard(
@@ -20,7 +20,7 @@ final class DashboardController extends AbstractController
     {
         $stats = $statsService->getStats();
 
-        return $this->render('admin/dashboard.html.twig',[
+        return $this->render('admin_dashboard.html.twig',[
             'vehicleCount' => $stats['vehicleCount'],
             'brandCount'   => $stats['brandCount'],
             'clientCount'  => $stats['clientCount'],

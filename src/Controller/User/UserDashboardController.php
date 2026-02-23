@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted('ROLE_USER')]
-final class DashboardController extends AbstractController
+final class UserDashboardController extends AbstractController
 {
     /*
     =========================

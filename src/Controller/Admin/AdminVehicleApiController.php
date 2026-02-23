@@ -4,20 +4,20 @@ namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
 use App\Repository\VehicleRepository;
-use App\Vehicle\Service\VehicleService;
+use App\Service\VehicleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
 /**
  * REST endpoint to delete a vehicle via AJAX.
  * Requires valid CSRF token.
  */
 #[IsGranted('ROLE_ADMIN')]
-final class VehicleApiController extends AbstractController
+final class AdminVehicleApiController extends AbstractController
 {
     /**
      * Deletes a vehicle and flushes persistence.

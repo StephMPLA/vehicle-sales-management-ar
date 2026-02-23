@@ -4,14 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
 use App\Form\VehicleType;
-use App\Vehicle\Service\VehicleService;
+use App\Service\VehicleService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/vehicle', name: 'app_admin_vehicle_')]
 #[IsGranted('ROLE_ADMIN')]
