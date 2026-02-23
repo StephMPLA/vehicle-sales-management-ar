@@ -100,15 +100,15 @@ class VehicleType extends AbstractType
                 'class' => VehicleStatus::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Select a status',
-            ])
-            ->add('model3dFile', FileType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => '3D Model (.glb)',
-                'constraints' => [
-                    new File(maxSize: '50M', mimeTypes: ['model/gltf-binary', 'application/octet-stream'], extensions: ['glb'])
-                ]
             ]);
+//            ->add('model3dFile', FileType::class, [
+//                'mapped' => false,
+//                'required' => false,
+//                'label' => '3D Model (.glb)',
+//                'constraints' => [
+//                    new File(maxSize: '50M', mimeTypes: ['model/gltf-binary', 'application/octet-stream'], extensions: ['glb'])
+//                ]
+//            ]);
 //            ->add('model3dFile', FileType::class, [
 //                'mapped' => false,
 //                'required' => false,

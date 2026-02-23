@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted("ROLE_ADMIN")]
 class AdminPdfController extends AbstractController
 {
-    #[Route('/admin/client/{id}/pdf', name: 'admin_client_pdf')]
+    #[Route('/admin/client/{id}/pdf', name: 'admin_client_pdf',methods: ['GET'])]
     public function clientPdf(
         User $client,
         PdfGenerator $pdf
