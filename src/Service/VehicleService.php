@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vehicle\Service;
+namespace App\Service;
 
 use App\Entity\Vehicle;
 use App\Entity\VehicleImage;
