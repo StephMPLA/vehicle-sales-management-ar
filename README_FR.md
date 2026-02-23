@@ -71,6 +71,8 @@ Cela démontre une utilisation pratique de REST en complément du MVC.
 - Gestion optionnelle d’images véhicule
 - Support prévisualisation 3D / AR
 - Contrôle d’accès par rôles
+- Gotenberg (microservice de génération PDF)
+
 
 ---
 
@@ -135,19 +137,34 @@ Un diagramme UML est fourni pour documenter la structure du domaine.
 
 ---
 
+## Génération de PDF
+
+L’application intègre **Gotenberg** afin de générer des documents PDF professionnels.
+
+Les fiches clients peuvent être exportées en PDF directement depuis le tableau de bord administrateur.
+
+---
+
 ## Installation
 
 ```bash
 git clone https://github.com/StephMPLA/vehicle-sales-management-ar.git
 cd vehicle-sales-management-ar
 
+# Install PHP dependencies
 composer install
 
+# Configure environment
 cp .env .env.local
-# configurer les accès base de données
+# configure database credentials if needed
 
+# Create database
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 
+# Start external services (PDF microservice)
+docker compose up -d
+
+# Start Symfony server
 symfony serve

@@ -37,6 +37,7 @@ The project mainly follows a **Symfony MVC architecture** for pages and forms, c
 - Symfony Forms — bound directly to entities
 - Twig templates — admin interface rendering
 - Services — encapsulate persistence operations (create / update / delete)
+- Gotenberg (PDF microservice)
 
 This keeps controllers thin and improves maintainability.
 
@@ -119,11 +120,32 @@ A UML class diagram is included to document the domain structure.
 
 ---
 
+## PDF Generation
+
+The application integrates **Gotenberg** as a Dockerized microservice
+to generate professional PDF documents.
+
+Client profiles can be exported as downloadable PDF files directly
+from the admin dashboard.
+
+PDF generation workflow:
+
+- Twig template rendering
+- HTML sent to Gotenberg service
+- PDF generated via Chromium engine
+- File streamed or downloaded to the browser
+
+The integration is handled through a dedicated Symfony service
+using dependency injection.
+
+---
+
 ## Tech Stack
 
 - PHP 8.3
 - Symfony 7.x
 - Doctrine ORM
+- Docker
 - MySQL
 - Twig
 - Symfony Forms
@@ -131,6 +153,20 @@ A UML class diagram is included to document the domain structure.
 - Doctrine Fixtures Bundle
 - Tailwind CSS (admin UI)
 - Vanilla JavaScript (fetch / AJAX)
+
+---
+## Docker Services
+
+The project uses Docker for external services:
+
+- Gotenberg — PDF generation microservice
+
+Start services:
+
+```bash
+docker compose up -d
+
+http://localhost:3000/health
 
 ---
 
@@ -149,4 +185,8 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 
+# start external services
+docker compose up -d
+
+# start Symfony server
 symfony serve
