@@ -8,13 +8,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
-    public const SUV_CATEGORY_REFERENCE = 'suv_category';
     public function load(ObjectManager $manager): void
     {
-        $suv = new Category();
-        $suv->setName('Suv');
-        $this->addReference(self::SUV_CATEGORY_REFERENCE, $suv);
-        $manager->persist($suv);
+        $categories = ['Convertible', 'Coupe', 'Hatchback', 'Minivan', 'Off-road', 'Pickup', 'Sedan', 'Sports Car', 'Station Wagon', 'SUV', 'Utility Vehicle', 'Van' ];
+        foreach ($categories as $categoryName) {
+            $category = new Category();
+            $category->setName($categoryName);
+            $manager->persist($category);
+        }
         $manager->flush();
     }
 }

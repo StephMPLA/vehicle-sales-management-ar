@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
 use App\Form\VehicleType;
-use App\Service\VehicleService;
+use App\Service\Vehicle\VehicleService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +14,9 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/vehicle', name: 'app_admin_vehicle_')]
-#[IsGranted('ROLE_ADMIN')]
 final class AdminVehicleController extends AbstractController
 {
-    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET','POST'])]
     public function new(
         Request $request,
         VehicleService $vehicleService
@@ -42,7 +41,7 @@ final class AdminVehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET','POST'])]
+    #[Route('/{id}/edit', name: 'edit', requirements: ['id'=>'\d+'], methods: ['GET','POST'])]
     public function edit(
         Request $request,
         Vehicle $vehicle,
@@ -55,14 +54,7 @@ final class AdminVehicleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /** @var UploadedFile|null $modelFile */
-            $modelFile = $form->get('model3dFile')->getData();
-
-            $vehicleService->update(
-                $vehicle,
-                [],
-                $modelFile
-            );
+            $vehicleService->save($vehicle);
 
             $this->addFlash('success', 'Vehicle updated');
 

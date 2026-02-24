@@ -2,6 +2,8 @@
 
 namespace App\Service\Admin;
 
+use App\Entity\User;
+use App\Entity\Vehicle;
 use App\Repository\BrandRepository;
 use App\Repository\UserRepository;
 use App\Repository\VehicleRepository;
@@ -22,6 +24,14 @@ class DashboardStatsService
     ) {}
     /**
      * Returns aggregated statistics for the admin dashboard.
+     *
+     * @return array{
+     *     vehicleCount:int,
+     *     brandCount:int,
+     *     clientCount:int,
+     *     clientsList: User[],
+     *     vehiclesView: Vehicle[]
+     * }
      */
     public function getStats(): array
     {

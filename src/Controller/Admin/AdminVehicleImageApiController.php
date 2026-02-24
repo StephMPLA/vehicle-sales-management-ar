@@ -15,13 +15,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/admin/api/vehicle-images')]
-#[IsGranted('ROLE_ADMIN')]
 final class AdminVehicleImageApiController extends AbstractController
 {
-    public function __construct(
-        private CsrfTokenManagerInterface $csrfTokenManager
-    ) {}
-    #[Route('/{id}/upload', name: 'app_admin_vehicle_image_upload', methods: ['POST'])]
+    #[Route('/{id}/upload', name: 'app_admin_vehicle_image_upload', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function uploadImageAjax(
         Request $request,
         Vehicle $vehicle,
@@ -78,7 +74,7 @@ final class AdminVehicleImageApiController extends AbstractController
             'html' => $html
         ]);
     }
-    #[Route('/images/{id}/delete', name: 'app_admin_vehicle_image_delete_ajax', methods: ['POST'])]
+    #[Route('/images/{id}/delete', name: 'app_admin_vehicle_image_delete_ajax', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function deleteImageAjax(
         Request $request,
         VehicleImage $image,

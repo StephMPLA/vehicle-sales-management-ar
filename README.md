@@ -1,74 +1,73 @@
 # Vehicle Sales Management AR
 
-Recruiter-focused demo project built with **Symfony** to demonstrate a clean backend architecture, admin CRUD workflows, and a realistic vehicle catalog domain.  
-The project also includes a small REST API endpoint used for dynamic UI updates without page reload.
+Recruiter-focused backend project built with **Symfony**
+demonstrating clean architecture principles, admin workflows,
+and a realistic vehicle catalog domain.
 
-The application allows administrators to manage a vehicle catalog, handle related reference data, process reservation requests, and preview selected vehicles in 3D / AR. An admin dashboard displays KPIs that update dynamically after certain actions.
+The application allows administrators to manage vehicles,
+reference data, reservation requests, and preview vehicles
+in **3D / Augmented Reality**.
 
 ---
 
 ## Project Purpose
 
-This project was created as a **technical portfolio project** to showcase practical Symfony backend skills on a realistic use case.
+This project was developed as a **technical portfolio application**
+to showcase real-world Symfony backend development practices.
 
 It demonstrates:
 
-- Symfony MVC architecture
-- Admin CRUD operations
-- Doctrine entity modeling and relationships
-- Symfony Forms usage
+- Clean Symfony MVC architecture
+- Doctrine ORM domain modeling
 - Service layer pattern
-- Secure delete workflow
-- Partial REST API integration
-- AJAX UI updates without reload
-- Clean and readable code structure
+- Secure admin workflows
+- AJAX-based asynchronous operations
+- Dynamic dashboard updates
+- Maintainable and typed backend code
 
 ---
 
-## Architecture Overview
+## Architecture
 
-The project mainly follows a **Symfony MVC architecture** for pages and forms, combined with a **targeted REST API layer** for dynamic operations.
+The application follows a **Symfony MVC architecture**
+combined with a dedicated service layer.
 
-### MVC Layer
+### Main components
 
-- Controllers — handle admin pages and workflows
-- Entities — domain objects mapped with Doctrine ORM
-- Repositories — database access logic
-- Symfony Forms — bound directly to entities
-- Twig templates — admin interface rendering
-- Services — encapsulate persistence operations (create / update / delete)
-- Gotenberg (PDF microservice)
+- Controllers — admin workflows
+- Entities — Doctrine domain model
+- Repositories — data access logic
+- Services — business operations
+- Symfony Forms — entity-driven forms
+- Twig — admin interface
+- JSON API endpoints — asynchronous admin actions
 
-This keeps controllers thin and improves maintainability.
+Controllers remain lightweight while business logic
+is centralized inside services.
 
-### REST API (Targeted Usage)
+---
 
-A REST endpoint is implemented for vehicle deletion:
+## Code Quality
 
-- `DELETE /api/admin/vehicles/{id}`
-- JSON request with CSRF token
-- Deletion handled via service layer
-- Triggered using JavaScript `fetch()`
-- Table row removed dynamically in the UI
-- Vehicle KPI counter refreshed via API
-- No full page reload required
+- Static analysis with **PHPStan (level 6)**
+- Strict typing and nullable consistency
+- Typed repositories and services
+- Service layer architecture
+- Maintainable and readable codebase
 
-This demonstrates practical REST usage alongside MVC.
-
+✅ PHPStan: 0 errors
 ---
 
 ## Main Features
 
-- Admin vehicle catalog management
-- Create and edit vehicles with Symfony Forms
-- Reference data management (brand, category, fuel, transmission, status)
-- Vehicle status tracking
-- Reservation request entity and workflow
+- Vehicle catalog administration
+- Reference data management  
+  (Brand, Category, Fuel, Transmission, Status)
+- Reservation request workflow
 - Admin dashboard with KPI counters
-- Secure delete via REST + AJAX
-- Live KPI refresh after deletion
-- Doctrine fixtures for demo dataset
-- Optional vehicle image handling
+- Secure delete operations via AJAX
+- Dynamic UI updates without page reload
+- Vehicle image upload handling
 - 3D / AR model preview support
 - Role-based access control
 
@@ -76,7 +75,7 @@ This demonstrates practical REST usage alongside MVC.
 
 ## Domain Model
 
-Core entities include:
+Core entities:
 
 - Vehicle
 - Brand
@@ -88,9 +87,8 @@ Core entities include:
 - ReservationRequest
 - User
 
-Doctrine relationships are properly mapped with constraints and associations.
-
-A UML class diagram is included to document the domain structure.
+Doctrine relationships are properly mapped
+with constraints and associations.
 
 ---
 
@@ -98,75 +96,38 @@ A UML class diagram is included to document the domain structure.
 
 - Symfony Security component
 - Role-based access control (ROLE_ADMIN / ROLE_USER)
-- Admin routes protected with attributes
-- CSRF protection on forms
-- CSRF validation on REST delete endpoint
-- Secure delete workflow (token + role check)
-- Authentication success redirect by role
-
----
-
-## Technical Highlights
-
-- Symfony MVC + service layer pattern
-- Doctrine ORM with multiple relationships
-- Entity-driven Symfony Forms
-- REST DELETE endpoint
-- JSON request/response handling
-- AJAX delete with fetch API
-- Dynamic UI synchronization after server mutation
-- Dashboard KPI refresh via API call
-- Clean separation of concerns
+- Protected admin routes
+- CSRF protection (forms & API actions)
+- Authentication redirect by role
 
 ---
 
 ## PDF Generation
 
-The application integrates **Gotenberg** as a Dockerized microservice
-to generate professional PDF documents.
+The application integrates **Gotenberg**
+as a Dockerized microservice for PDF generation.
 
-Client profiles can be exported as downloadable PDF files directly
-from the admin dashboard.
-
-PDF generation workflow:
+Workflow:
 
 - Twig template rendering
-- HTML sent to Gotenberg service
-- PDF generated via Chromium engine
-- File streamed or downloaded to the browser
-
-The integration is handled through a dedicated Symfony service
-using dependency injection.
+- HTML sent to Gotenberg
+- PDF generated via Chromium
+- File streamed to browser
 
 ---
 
 ## Tech Stack
 
 - PHP 8.3
-- Symfony 7.x
+- Symfony
 - Doctrine ORM
-- Docker
 - MySQL
+- Docker (Gotenberg)
 - Twig
 - Symfony Forms
 - Symfony Security
-- Doctrine Fixtures Bundle
-- Tailwind CSS (admin UI)
-- Vanilla JavaScript (fetch / AJAX)
-
----
-## Docker Services
-
-The project uses Docker for external services:
-
-- Gotenberg — PDF generation microservice
-
-Start services:
-
-```bash
-docker compose up -d
-
-http://localhost:3000/health
+- Tailwind CSS
+- Vanilla JavaScript (AJAX / fetch)
 
 ---
 
@@ -179,14 +140,12 @@ cd vehicle-sales-management-ar
 composer install
 
 cp .env .env.local
-# configure database credentials
+# configure database
 
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 
-# start external services
 docker compose up -d
 
-# start Symfony server
 symfony serve
