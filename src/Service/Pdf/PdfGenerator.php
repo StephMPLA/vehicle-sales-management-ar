@@ -10,7 +10,9 @@ class PdfGenerator
     public function __construct(
         private GotenbergPdfInterface $gotenberg
     ) {}
-
+    /**
+     * @param array<string, mixed> $data
+     */
     public function generate(
         string $template,
         array $data,

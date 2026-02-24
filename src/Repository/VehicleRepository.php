@@ -15,34 +15,11 @@ class VehicleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Vehicle::class);
     }
-
-    //    /**
-    //     * @return Vehicle[] Returns an array of Vehicle objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Vehicle
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
-
     /**
-     * Returns the total number of vehicles stored in database.
+     * @return array{
+     *     vehicles: int,
+     *     brands: int
+     * }
      */
     public function getDashboardStats(): array
     {
@@ -54,6 +31,9 @@ class VehicleRepository extends ServiceEntityRepository
             ->getSingleResult();
     }
 
+    /**
+     * @return Vehicle[]
+     */
     public function getVehicles(): array
     {
         return $this->createQueryBuilder('v')
@@ -61,7 +41,9 @@ class VehicleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+    /**
+     * @return Vehicle[]
+     */
     public function findAvailable(): array
     {
         return $this->createQueryBuilder('v')
@@ -77,6 +59,7 @@ class VehicleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    /** @return Vehicle[] */
     public function getVehiclesUsed(): array
     {
         return $this->createQueryBuilder('v')

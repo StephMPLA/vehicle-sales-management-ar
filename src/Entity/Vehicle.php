@@ -60,7 +60,7 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Brand $brand = null;
+    private Brand $brand;
 
     /**
      * @var Collection<int, VehicleImage>
@@ -70,19 +70,19 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
+    private Category $category;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Fuel $fuel = null;
+    private Fuel $fuel;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?VehicleTransmission $transmission = null;
+    private VehicleTransmission $transmission;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?VehicleStatus $status = null;
+    private VehicleStatus $status;
 
     public function __construct()
     {
@@ -220,7 +220,7 @@ class Vehicle
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
@@ -232,7 +232,7 @@ class Vehicle
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(?\DateTimeImmutable $publishedAt): static
+    public function setPublishedAt(\DateTimeImmutable $publishedAt): static
     {
         $this->publishedAt = $publishedAt;
 
@@ -244,12 +244,12 @@ class Vehicle
         $this->updatedAt = new \DateTimeImmutable();
     }
 
-    public function getBrand(): ?Brand
+    public function getBrand(): Brand
     {
         return $this->brand;
     }
 
-    public function setBrand(?Brand $brand): static
+    public function setBrand(Brand $brand): static
     {
         $this->brand = $brand;
 
@@ -286,48 +286,48 @@ class Vehicle
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategory(Category $category): static
     {
         $this->category = $category;
 
         return $this;
     }
 
-    public function getFuel(): ?Fuel
+    public function getFuel(): Fuel
     {
         return $this->fuel;
     }
 
-    public function setFuel(?Fuel $fuel): static
+    public function setFuel(Fuel $fuel): static
     {
         $this->fuel = $fuel;
 
         return $this;
     }
 
-    public function getTransmission(): ?VehicleTransmission
+    public function getTransmission(): VehicleTransmission
     {
         return $this->transmission;
     }
 
-    public function setTransmission(?VehicleTransmission $transmission): static
+    public function setTransmission(VehicleTransmission $transmission): static
     {
         $this->transmission = $transmission;
 
         return $this;
     }
 
-    public function getStatus(): ?VehicleStatus
+    public function getStatus(): VehicleStatus
     {
         return $this->status;
     }
 
-    public function setStatus(?VehicleStatus $status): static
+    public function setStatus(VehicleStatus $status): static
     {
         $this->status = $status;
 

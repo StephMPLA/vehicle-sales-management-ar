@@ -8,13 +8,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class FuelFixtures extends Fixture
 {
-    public const GAZOLINE_FUEL_REFERENCE = 'gazoline_fuel';
     public function load(ObjectManager $manager): void
     {
-       $gazoline = new Fuel();
-       $gazoline->setName('Gazoline');
-       $this->addReference(self::GAZOLINE_FUEL_REFERENCE, $gazoline);
-       $manager->persist($gazoline);
+        $fuels = ['Diesel', 'Gasoline', 'Electric', 'Hybrid', 'Hydrogen', 'Plug-in Hybrid'];
+        foreach ($fuels as $fuelName) {
+            $fuel = new Fuel();
+            $fuel->setName($fuelName);
+            $manager->persist($fuel);
+        }
        $manager->flush();
     }
 }

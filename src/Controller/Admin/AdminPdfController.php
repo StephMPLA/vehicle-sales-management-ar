@@ -9,10 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted("ROLE_ADMIN")]
 class AdminPdfController extends AbstractController
 {
-    #[Route('/admin/client/{id}/pdf', name: 'admin_client_pdf',methods: ['GET'])]
+    #[Route('/admin/client/{id}/pdf', name: 'admin_client_pdf', requirements: ['id'=>'\d+'], methods: ['GET'])]
     public function clientPdf(
         User $client,
         PdfGenerator $pdf
