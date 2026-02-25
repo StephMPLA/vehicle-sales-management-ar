@@ -40,8 +40,8 @@ combined with a dedicated service layer.
 - Services — business operations
 - Symfony Forms — entity-driven forms
 - Twig — admin interface
-- JSON API endpoints — asynchronous admin actions
-
+- API Platform — REST API layer
+- JavaScript (fetch) — dynamic frontend rendering
 Controllers remain lightweight while business logic
 is centralized inside services.
 
@@ -70,7 +70,10 @@ is centralized inside services.
 - Vehicle image upload handling
 - 3D / AR model preview support
 - Role-based access control
-
+- Public REST API powered by API Platform
+- Paginated vehicle listing
+- Dynamic frontend rendering via API consumption
+- Server-side filtering & ordering support
 ---
 
 ## Domain Model
@@ -128,6 +131,24 @@ Workflow:
 - Symfony Security
 - Tailwind CSS
 - Vanilla JavaScript (AJAX / fetch)
+- API Platform
+
+---
+
+## API Layer
+
+The project exposes domain resources through API Platform.
+Features include:
+
+- RESTful resource exposure
+- Automatic pagination
+- Ordering and filtering
+- Serialization groups
+- Frontend consumption via Fetch API
+- Decoupled data delivery architecture
+
+The homepage dynamically loads vehicles through the API,
+demonstrating a modern API-driven Symfony application.
 
 ---
 

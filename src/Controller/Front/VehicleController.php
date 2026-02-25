@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class VehicleController extends AbstractController
 {
-    #[Route('/vehicle/{id}', name: 'app_vehicle_show')]
+    #[Route('/vehicle/{id}', name: 'app_vehicle_show',methods: ['GET'])]
     public function show(Vehicle $vehicle): Response
     {
         return $this->render('vehicle/show.html.twig', [

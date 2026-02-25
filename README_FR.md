@@ -1,82 +1,87 @@
 # Vehicle Sales Management AR
 
-Projet backend orienté recruteur développé avec **Symfony**
-afin de démontrer une architecture propre, des workflows
-d’administration et un domaine métier réaliste de gestion
-de catalogue de véhicules.
+Application backend orientée recruteur développée avec **Symfony**,
+mettant en avant une architecture propre, des workflows d’administration
+sécurisés et un domaine métier réaliste de gestion de catalogue de véhicules.
 
-L’application permet à un administrateur de gérer des véhicules,
-des données de référence, des demandes de réservation
-et d’afficher des modèles en **3D / Réalité Augmentée**.
+L’application permet aux administrateurs de gérer des véhicules,
+les données de référence associées, les demandes de réservation,
+et d’afficher des véhicules avec prévisualisation **3D / Réalité Augmentée**.
 
 ---
 
 ## Objectif du projet
 
-Ce projet a été réalisé comme **projet portfolio technique**
-afin de présenter des compétences concrètes en développement
-backend Symfony sur un cas proche d’une application réelle.
+Ce projet a été conçu comme une **application portfolio technique**
+afin de démontrer des compétences concrètes en développement backend Symfony
+dans un contexte proche d’une application métier réelle.
 
 Il met en avant :
 
-- Architecture Symfony MVC claire
+- Architecture Symfony MVC propre
 - Modélisation métier avec Doctrine ORM
-- Pattern Service Layer
-- Workflows d’administration sécurisés
-- Actions asynchrones via AJAX
-- Tableau de bord dynamique
-- Code maintenable et typé
+- Séparation des responsabilités
+- Couche de services dédiée
+- Workflows administrateur sécurisés
+- Opérations asynchrones via AJAX
+- Mise à jour dynamique de l’interface
+- Code maintenable, typé et structuré
 
 ---
 
 ## Architecture
 
 L’application repose sur une architecture **Symfony MVC**
-complétée par une couche de services métier.
+complétée par une **couche de services métier**.
 
 ### Composants principaux
 
-- Controllers — gestion des workflows admin
-- Entities — modèle métier Doctrine
+- Controllers — gestion des workflows
+- Entities — modèle de domaine Doctrine
 - Repositories — accès aux données
-- Services — logique applicative
-- Symfony Forms — formulaires liés aux entités
+- Services — logique métier
+- Symfony Forms — gestion des formulaires
 - Twig — interface d’administration
-- Endpoints JSON — actions asynchrones (AJAX)
+- API Platform — exposition REST des ressources
+- JavaScript (Fetch API) — rendu dynamique côté frontend
 
-Les contrôleurs restent légers,
-la logique métier étant centralisée dans les services.
+Les contrôleurs restent légers tandis que la logique métier
+est centralisée dans les services.
 
 ---
 
 ## Qualité du code
 
 - Analyse statique avec **PHPStan (niveau 6)**
-- Typage strict et cohérence des valeurs nullables
-- Repositories et services fortement typés
-- Architecture basée sur une couche de services
-- Code maintenable et lisible
+- Typage strict PHP
+- Gestion cohérente des valeurs nullables
+- Repositories et services typés
+- Code lisible et maintenable
 
-✅ Analyse PHPStan sans erreur
+✅ PHPStan : 0 erreur
 
 ---
 
 ## Fonctionnalités principales
 
-- Gestion du catalogue véhicules
+- Administration du catalogue de véhicules
 - Gestion des données de référence  
   (Marque, Catégorie, Carburant, Transmission, Statut)
-- Gestion des demandes de réservation
-- Dashboard administrateur avec KPI
-- Suppression sécurisée via AJAX
+- Workflow de demandes de réservation
+- Tableau de bord administrateur avec KPI
+- Suppressions sécurisées via AJAX
 - Mise à jour dynamique sans rechargement
-- Upload d’images véhicules
-- Prévisualisation 3D / AR
+- Upload et gestion d’images véhicules
+- Prévisualisation modèles 3D / AR
 - Gestion des rôles utilisateurs
+- API REST publique via API Platform
+- Pagination automatique des véhicules
+- Chargement dynamique des données côté frontend
+- Tri et filtrage côté serveur
 
 ---
 
-## Modèle métier
+## Modèle de domaine
 
 Entités principales :
 
@@ -90,8 +95,8 @@ Entités principales :
 - ReservationRequest
 - User
 
-Relations Doctrine correctement définies
-avec contraintes et associations.
+Les relations Doctrine sont correctement définies
+avec contraintes et associations métier.
 
 ---
 
@@ -99,23 +104,23 @@ avec contraintes et associations.
 
 - Composant Symfony Security
 - Gestion des rôles (ROLE_ADMIN / ROLE_USER)
-- Routes admin protégées
-- Protection CSRF
-- Vérification sécurisée des actions sensibles
+- Protection des routes administrateur
+- Protection CSRF (formulaires & actions API)
+- Redirection automatique selon le rôle utilisateur
 
 ---
 
 ## Génération PDF
 
-Intégration de **Gotenberg**
-comme microservice Docker pour générer des PDF.
+L’application intègre **Gotenberg**
+comme microservice Docker pour la génération de PDF.
 
-Processus :
+### Fonctionnement
 
-- rendu Twig
-- envoi HTML vers Gotenberg
-- génération via Chromium
-- téléchargement navigateur
+- Rendu Twig HTML
+- Envoi vers Gotenberg
+- Génération PDF via Chromium
+- Streaming du fichier vers le navigateur
 
 ---
 
@@ -123,6 +128,7 @@ Processus :
 
 - PHP 8.3
 - Symfony
+- API Platform
 - Doctrine ORM
 - MySQL
 - Docker (Gotenberg)
@@ -130,7 +136,26 @@ Processus :
 - Symfony Forms
 - Symfony Security
 - Tailwind CSS
-- JavaScript natif (AJAX / fetch)
+- JavaScript Vanilla (Fetch / AJAX)
+
+---
+
+## Couche API
+
+Le projet expose les ressources métier via **API Platform**.
+
+Fonctionnalités :
+
+- API REST automatique
+- Pagination native
+- Tri et filtrage
+- Serializer Groups
+- Consommation frontend via Fetch API
+- Architecture découplée backend / frontend
+
+La page d’accueil charge dynamiquement les véhicules
+depuis l’API, illustrant une application Symfony moderne
+orientée API.
 
 ---
 
@@ -143,6 +168,7 @@ cd vehicle-sales-management-ar
 composer install
 
 cp .env .env.local
+# configurer la base de données
 
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate

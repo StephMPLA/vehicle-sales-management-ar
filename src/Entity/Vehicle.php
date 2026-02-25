@@ -2,6 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 use App\Repository\VehicleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,28 +22,48 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get()
+    ],
+    normalizationContext: ['groups' => ['vehicle:read']],
+    paginationItemsPerPage: 9
+)]
+#[ApiFilter(OrderFilter::class, properties: [
+    'createdAt',
+    'year',
+    'price'
+])]
 class Vehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private ?int $id = null;
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['vehicle:read'])]
     private string $name;
 
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private int $year;
 
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private int $horsePower;
 
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private int $weight;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['vehicle:read'])]
     private string $description;
 
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private int $price;
 
     #[ORM\Column]
@@ -47,9 +73,11 @@ class Vehicle
     private ?string $model3dPath = null;
 
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private int $mileage;
 
     #[ORM\Column(options: ['default' => false])]
+    #[Groups(['vehicle:read'])]
     private bool $isNew = false;
 
     #[ORM\Column(nullable: true)]
@@ -60,28 +88,34 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle:read'])]
     private Brand $brand;
 
     /**
      * @var Collection<int, VehicleImage>
      */
     #[ORM\OneToMany(targetEntity: VehicleImage::class, mappedBy: 'vehicle', cascade: ['persist'], orphanRemoval: true)]
+    #[Groups(['vehicle:read'])]
     private Collection $images;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle:read'])]
     private Category $category;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle:read'])]
     private Fuel $fuel;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle:read'])]
     private VehicleTransmission $transmission;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle:read'])]
     private VehicleStatus $status;
 
     public function __construct()
