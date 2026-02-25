@@ -2,9 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Enum\VehicleImageType;
 use App\Repository\VehicleImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get()
+    ],
+    normalizationContext: ['groups' => ['vehicle:read']]
+)]
 
 #[ORM\Entity(repositoryClass: VehicleImageRepository::class)]
 class VehicleImage
@@ -12,9 +23,11 @@ class VehicleImage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['vehicle:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['vehicle:read'])]
     private ?string $path = null;
 
     #[ORM\Column(enumType: VehicleImageType::class)]

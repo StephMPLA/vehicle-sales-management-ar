@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(
         VehicleRepository $vehicleRepository,
         BrandRepository $brandRepository
@@ -19,12 +19,9 @@ final class HomeController extends AbstractController
         $vehicleCount = $vehicleRepository->getDashboardStats();
         $brandCount   = $brandRepository->countBrands();
 
-        $vehicles = $vehicleRepository->findAvailable();
-
         return $this->render('home/index.html.twig', [
             'vehicleCount' => $vehicleCount,
             'brandCount'   => $brandCount,
-            'vehicles'     => $vehicles
         ]);
     }
 }
