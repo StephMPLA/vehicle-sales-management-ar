@@ -26,3 +26,5 @@ public/phpinfo.php
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+replacements.txt
+replace.txt
