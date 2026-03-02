@@ -202,24 +202,25 @@
 
             {% if vehicle.model3dPath %}
                 <section id="viewer3d" class="mt-12">
-                    <div class="bg-white border rounded-2xl shadow-sm p-6">
-                        <div class="flex items-center justify-between gap-4 mb-5">
-                            <h2 class="text-2xl font-bold text-gray-900">3D / AR Preview</h2>
+                    <div class="bg-white border rounded-2xl shadow-sm p-6 text-center">
 
-                            <span class="text-sm text-gray-500">
-                                AR button appears on compatible mobile devices.
-                            </span>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                            3D / AR Preview
+                        </h2>
+
+                        <p class="text-lg text-gray-700 font-medium mb-3">
+                            Ah… tu pensais récupérer la technologie AR aussi facilement ?
+                        </p>
+
+                        <p class="text-gray-500">
+                            Désolé 😉
+                            L’accès aux modèles 3D est sécurisé côté serveur.
+                        </p>
+
+                        <div class="mt-6 text-sm text-gray-400">
+                            Les fichiers 3D sont protégés et ne sont pas accessibles directement.
                         </div>
 
-                        <model-viewer
-                            src="{{ asset(vehicle.model3dPath) }}"
-                            camera-controls
-                            auto-rotate
-                            shadow-intensity="1"
-                            ar
-                            ar-modes="scene-viewer webxr quick-look"
-                            class="w-full h-[520px] bg-gray-100 rounded-xl">
-                        </model-viewer>
                     </div>
                 </section>
             {% endif %}
