@@ -3,11 +3,11 @@
 {% block title %}{{ vehicle.name }}{% endblock %}
 
 {% block javascripts %}
-***REMOVED*** src="{{ asset('js/vehicle-show.js') }}"></script>
+    <script src="{{ asset('js/vehicle-show.js') }}"></script>
 {% endblock %}
 {% block body %}
 
-    {% set cover = (vehicle.images|length > 0) ? vehicle.images|first.path : asset('uploads/noImageAvailable.png') %}
+    {% set cover = (vehicle.images|length > 0) ? vehicle.images|first.path : asset('images/noImageAvailable.png') %}
 
     <div class="bg-white">
 
@@ -91,7 +91,7 @@
                                             data-index="{{ loop.index0 }}">
 
                                         <img src="{{ img.path }}"
-                                             class="w-24 h-16 object-cover">
+                                             class="w-24 h-16 object-cover" alt="">
                                     </button>
                                 {% endfor %}
 
@@ -111,8 +111,8 @@
 
                         {% else %}
 
-                            <img src="{{ asset('uploads/noImageAvailable.png') }}"
-                                 class="w-full h-[420px] object-cover rounded-xl">
+                            <img src="{{ asset('images/noImageAvailable.png') }}"
+                                 class="w-full h-[420px] object-cover rounded-xl" alt="">
 
                         {% endif %}
 
